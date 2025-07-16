@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alakan Residency</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+<!-- AOS Scroll Animation Library -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <style>
+  :root {
+    --alakaz-maroon: #A52626;
+    --alakaz-maroon-hover: #C03030;
+    --alakaz-gradient: linear-gradient(135deg, #A52626, #C03030);
+  }
+body::-webkit-scrollbar{
+  display:none;
+}
+  /* Global text color */
+  body, p, span, li, a, h1, h2, h3, h4, h5, h6 {
+    color: var(--alakaz-maroon) !important;
+  }
+
+  /* Buttons and call-to-actions */
+  button, .book-btn, .btn, input[type="submit"] {
+    background-color: var(--alakaz-maroon) !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    box-shadow: 0 3px 10px rgba(165, 38, 38, 0.2);
+  }
+
+  button:hover, .book-btn:hover, .btn:hover {
+    background-color: var(--alakaz-maroon-hover) !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(192, 48, 48, 0.4);
+  }
+
+  /* Optional gradient background use */
+  .alakaz-maroon-bg {
+    background: var(--alakaz-gradient);
+    color: #fff;
+}
+</style>
+
+  <!-- Loader -->
+  <div id="loader">
+    <canvas id="houseCanvas" width="300" height="300"></canvas>
+    <p class="loading-text">Preparing your luxury stay…</p>
+  </div>
+
+  <!-- Main Content -->
+  <div id="content" style="display: none;">
+    <nav class="navbar">
+      <div class="logo">
+        <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-list" id="nav-list">
+        <div class="underline" id="underline"></div>
+        <li class="nav-item active "><a href="#"><h1></h1>Home</a></li>
+        <li class="nav-item"><a href="./rooms.html/rooms.html">Rooms</a></li>
+        <li class="nav-item"><a href="./gallery/gallery.html">Gallery</a></li>
+        <li class="nav-item"><a href="./contact us/contact.html">Contact Us</a></li>
+        <li class="nav-item dropdown" id="dropdown">
+          <a href="#" id="dropdownToggle">
+            Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
+          </a>
+ <ul class="dropdown-menu" id="dropdownMenu">
+            <li><a href="./services/services.html"style="color:white!important;">Services</a></li>
+            <li><a href="./policy/policy.html"style="color:white!important;">Policy</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+<div id="home" style="position: relative;">
+    <style>
+    /* Global button animation */
+    .book-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #d64343;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: fadeSlideIn 1s forwards;
+      animation-delay: 0.6s;
+      opacity: 0;
+    }
+
+    .book-btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-25deg);
+      transition: left 0.5s;
+    }
+
+    .book-btn:hover::after {
+      left: 125%;
+    }
+
+    .book-btn:hover {
+      background: #bb1e1e;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Slide 1 - Typing */
+    .typing-effect {
+      background: linear-gradient(135deg, #f9ec76, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      right: 20%;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #f97676;
+      animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
+      width: 155%;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    /* Slide 2 - Fade Zoom */
+    .fade-zoom {
+        background: linear-gradient(135deg, #f9ec76, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      right: 30%;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 155%;
+      animation: fadeZoom 1s ease forwards;
+    }
+
+    @keyframes fadeZoom {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Slide 3 - Slide-up */
+    .slide-up {
+        background: linear-gradient(135deg, #f9ec76, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      right: 30%;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 155%;
+      animation: slideUp 1s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Subtext animation - Jumping */
+    .jump-word span {
+      display: inline-block;
+      animation: jump 1s infinite;
+      color: #fff !important;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .jump-word span:nth-child(odd) {
+      animation-delay: 0.1s;
+    }
+
+    .jump-word span:nth-child(even) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes jump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    #slider {
+      transition: background-image 1s ease-in-out;
+    }
+  </style>
+
+  <!-- Slider -->
+  <div id="slider" class="relative w-full h-screen bg-cover bg-center flex items-center justify-center text-white text-center px-4 py-12">
+    <!-- JS will insert content -->
+  </div>
+
+  <!-- Dots -->
+  <div id="dots2" class="absolute  right-1/2 bottom-0 transform -translate-y-1/2 flex flex-row z-10 gap-5" >
+    <!-- JS will insert dots -->
+  </div>
+
+  <script>
+    const slides = [
+      {
+        heading: "Welcome to Alakar Residency",
+        text: "Experience the warmth and elegance of hospitality.",
+        image: "https://media.istockphoto.com/id/909589966/photo/3d-render-of-commercial-building-interior-and-reception.jpg?s=612x612&w=0&k=20&c=uNptkSDX00wzhkYoIM4tRW7GACijtlZvYc6pRVs9V1M=",
+        animationClass: "typing-effect"
+      },
+      {
+        heading: "Book Your Comfort Stay",
+        text: "Premium rooms with AC, WiFi, and serene ambiance.",
+        image: "https://images.unsplash.com/photo-1621293954908-907159247fc8?w=500&auto=format&fit=crop&q=60",
+        animationClass: "fade-zoom"
+      },
+      {
+        heading: "Discover Tiruchendur",
+        text: "Stay close to divine places with ultimate comfort.",
+        image: "https://media.istockphoto.com/id/1075994138/photo/3d-render-of-luxury-hotel-lobby-and-reception.webp?a=1&b=1&s=612x612&w=0&k=20&c=2HD2zwiiSFpfIVHFiuwcuNpoGyEID-JL6pj0en65gLg=",
+        animationClass: "slide-up"
+      }
+    ];
+
+    const slider = document.getElementById("slider");
+    const dotsContainer = document.getElementById("dots2");
+    let currentIndex = 0;
+    let interval;
+
+    function updateSlide(index) {
+      const slide = slides[index];
+      currentIndex = index;
+
+      // Set background
+      slider.style.backgroundImage = `url('${slide.image}')`;
+
+      // Set content with unique animation class
+      slider.innerHTML = `
+        <div class="p-8 max-w-2xl mx-auto">
+          <h1 class="text-4xl md:text-6xl font-bold mb-4 ${slide.animationClass}">${slide.heading}</h1>
+          <p class="text-lg md:text-2xl jump-word mb-6">
+            ${slide.text.split('').map(char =>` <span>${char === ' ' ? '&nbsp;' : char}</span>`).join('')}
+          </p>
+          <a href="../booking.html/booking.html" class="book-btn">Book Now</a>
+        </div>
+      `;
+
+      // Highlight active dot
+      const dots = dotsContainer.querySelectorAll(".dot");
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("bg-yellow-400", i === index);
+        dot.classList.toggle("bg-gray-400", i !== index);
+      });
+    }
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement("div");
+      dot.className = "dot w-3 h-3 rounded-full mb-3 cursor-pointer bg-gray-400 transition-all";
+      dot.addEventListener("click", () => {
+        updateSlide(i);
+        resetAutoSlide();
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    function autoSlide() {
+      interval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlide(currentIndex);
+      }, 6000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(interval);
+      autoSlide();
+    }
+
+    // Start
+    updateSlide(0);
+    autoSlide();
+  </script>
+</div>
+
+     <!-- ABOUT US SECTION -->
+<section class="py-16 px-4 text-center bg-white text-gray-800 " style="box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
+  <h1 class="text-4xl font-extrabold text-red-200 mb-4 fade-up">About Us</h1>
+  <p class="text-gray-700 max-w-xl mx-auto fade-up delay-200">
+    Alakarz Residency is your perfect blend of comfort and elegance, located in the heart of Tiruchendur. Whether for pilgrimage or leisure, we promise a serene and memorable stay.
+  </p>
+
+  <!-- Cards Container -->
+  <div class="mt-12 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+    <!-- CARD 1 -->
+    <div class=" animated-border fade-up delay-300 ">
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition">
+<svg style="width: 60px;display:inline-block " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
+ <h2 class="text-xl font-bold text-red-300 mb-2">Comfortable Stay</h2>
+        <p class="text-gray-700">Experience clean, well-maintained AC & non-AC rooms designed for your peace and relaxation.</p>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="animated-border fade-up delay-500">
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition">
+      <svg style="width: 60px;display:inline-block " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
+
+        <h2 class="text-xl font-bold text-red-300 mb-2">Prime Location</h2>
+        <p class="text-gray-700">Just minutes away from Tiruchendur Murugan Temple and other major landmarks for easy access.</p>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="animated-border  fade-up delay-700 ">
+      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition ">
+<svg style="width: 60px;display:inline-block " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
+
+        <h2 class="text-xl font-bold text-red-300 mb-2">24/7 Support</h2>
+        <p class="text-gray-700">24/7 water, free Wi-Fi, ample parking, CCTV security, elevator access, and more for your convenience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Best Seller -->
+<section class="py-16 px-4 bg-black text-white">
+  <h1 class="font-bold mt-5 text-4xl text-center text-red-200 mb-10">Best Seller</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    
+ <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
+      <img src="https://images.unsplash.com/photo-1657639754502-3c138cb24b4c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8NCUyMGJlZCUyMHJvb218ZW58MHx8MHx8fDA%3D" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Delux Double Room <br>$250</h2>
+      </div>
+    </div>
+
+    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
+      <img src="https://images.unsplash.com/photo-1708517196691-b1d75c483e4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Executive Suite <br>$600</h2>
+      </div>
+    </div>
+
+    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
+      <img src="https://images.unsplash.com/photo-1595161695996-f746349f4945?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Temple View Room <br>$300</h2>
+      </div>
+    </div>
+        <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
+      <img src="https://images.unsplash.com/photo-1648634158203-199accfd7afc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Family Room<br>$356</h2>
+      </div>
+        </div>
+    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
+      <img src="https://images.unsplash.com/photo-1718851972754-6638b49b4775?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Standard Ac Room <br>$130</h2>
+      </div>
+    </div>
+
+    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
+      <img src="https://media.istockphoto.com/id/954121470/photo/cozy-studio-apartment-design-with-bedroom-and-living-space.webp?a=1&b=1&s=612x612&w=0&k=20&c=TAbQz9v3luXCE6G1qnksN7VZED2t69XyE4_8AHk8Mfg=" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Premium Non-Ac Room <br>$620</h2>
+      </div>
+    </div>
+
+    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-500 glow-hover" data-aos="flip-left" data-aos-duration="1000">
+      <img src="https://media.istockphoto.com/id/954121470/photo/cozy-studio-apartment-design-with-bedroom-and-living-space.webp?a=1&b=1&s=612x612&w=0&k=20&c=TAbQz9v3luXCE6G1qnksN7VZED2t69XyE4_8AHk8Mfg=" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Lake View Room <br>$320</h2>
+      </div>
+    </div>
+        <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left !important" data-aos-duration="1000">
+      <img src="https://images.unsplash.com/photo-1745221847962-0397cc719b8e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGRlbHV4JTIwZG91YmxlJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
+      <div class="absolute bottom-2 left-0 right-0 text-center">
+        <h2 class="card-title text-lg font-bold bg-black bg-opacity-50 py-2">Garden Side Room <br>$240</h2>
+      </div>
+    </div>
+<style>
+  .group{
+    border:#bb1e1e solid 1px !important;
+  }
+  .glow-hover:hover {
+    box-shadow: 0 0 20px 4px  #d1b724;
+    transform: scale(1.05) rotate(1deg);
+  }
+
+  .card-title {
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in-out;
+    opacity: 0;
+  }
+
+  .group:hover .card-title {
+    transform: translateY(0%);
+    opacity:1;
+}
+</style>
+<script>
+  AOS.init();
+</script>
+  </div>
+</section>
+<!-- Carousel Section -->
+<section class="bg-[#0f291e] py-16 px-4 text-white">
+  <h2 class="text-3xl font-bold text-center text-red-200 mb-10">Customer Reviews</h2>
+
+  <!-- Swiper Container -->
+  <div class="swiper mySwiper max-w-6xl mx-auto">
+    <div class="swiper-wrapper">
+      <!-- Slide 1 -->
+      <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
+        <p class="mb-4">I had a very peaceful stay at Alakarz Residency. The rooms were neat and well-maintained, and the ambience was really calming. The staff was polite and always available. I would definitely recommend it for families visiting Tiruchendur!</p>
+        <div class="flex justify-between items-center">
+          <span class="text-red-400 font-bold">- Aisha Noor</span>
+          <div class="flex gap-1 text-yellow-400 text-lg">
+            ⭐⭐⭐⭐☆
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
+        <p class="mb-4">The best part about Alakarz is its location—just a few minutes away from the temple. Our room was spacious and air-conditioned, and the beds were super comfortable. We also enjoyed the prompt room service and friendly hospitality. Worth every rupee!</p>
+        <div class="flex justify-between items-center">
+          <span class="text-red-400 font-bold">- Rahman Yusuf</span>
+          <div class="flex gap-1 text-yellow-400 text-lg">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
+        <p class="mb-4">Excellent experience! I stayed for two nights and the reception team was very helpful. The check-in was smooth, and the room had all necessary amenities. Clean bathrooms and cozy interiors made my stay perfect. Will surely return on my next visit!<p>
+        <div class="flex justify-between items-center">
+          <span class="text-red-400 font-bold">- Meena Suresh</span>
+          <div class="flex gap-1 text-yellow-400 text-lg">
+            ⭐⭐⭐⭐☆
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
+        <p class="mb-4">What a beautiful and affordable place! The garden view from our room was lovely. Everything from cleanliness to service was top-notch. They also arranged local travel guidance for us. A calm, homely place that feels secure and well cared for.</p>
+        <div class="flex justify-between items-center">
+          <span class="text-yellow-400 font-bold">- Shanaya Iqbal</span>
+          <div class="flex gap-1 text-yellow-400 text-lg">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+       <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
+        <p class="mb-4">Excellent experience! I stayed for two nights and the reception team was very helpful. The check-in was smooth, and the room had all necessary amenities. Clean bathrooms and cozy interiors made my stay perfect. Will surely return on my next visit!<p>
+        <div class="flex justify-between items-center">
+          <span class="text-red-400 font-bold">- Vishal Dev</span>
+          <div class="flex gap-1 text-yellow-400 text-lg">
+            ⭐⭐⭐⭐☆
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="swiper-slide bg-[#d3d627] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
+        <p class="mb-4">I booked an executive suite and was pleasantly surprised. The design was elegant, and everything was spotless. The location is ideal for pilgrims and tourists. It was quiet at night, and the bed was super relaxing after a long temple visit.<p>
+        <div class="flex justify-between items-center">
+          <span class="text-yellow-400 font-bold">- Liyana Zahir</span>
+          <div class="flex gap-1 text-yellow-400 text-lg">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="swiper-pagination mt-10 !relative !bottom-auto "></div>
+  </div>
+  <!-- CTA Section -->
+<section id="cta" class="relative py-40 px-4 overflow-hidden bg-cover bg-center mt-20 right-5 top-16" style="background-image: url('https://images.unsplash.com/photo-1657763889378-9df569adac11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bHV4dXJ5JTIwaG90YWwlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D');width:100vw;">
+  
+  <!-- CTA Card -->
+  <div class="cta max-w-3xl mx-auto mt-32 text-center  z-10 relative">
+  <img src="sofa.png" alt="Pot Center" class="pot absolute left-1/3 -bottom-16  translate-x-1/2 -z-20 transition-all duration-1000 ease-in-out " style="width: 500px;"/>
+    <h2 class="text-4xl font-extrabold text-yellow-200 mb-4 drop-shadow mt-10 relative z-10">Book Your Stay at Alakarz Residency Today!</h2>
+    <p class="text-white text-lg md:text-xl font-medium mb-6  relative z-10 " style="color: white !important;">
+     Experience comfort, convenience, and class — all just minutes from Tiruchendur Temple. Reserve your room now and enjoy warm hospitality with unmatched amenities.
+    </p>
+    <button class=" animated-btn bg-yellow-200 text-white px-6 py-3 rounded-lg shadow-md font-bold ">
+<span class="relative z-10" style="color: white !important;"><a href="./booking.html/booking.html"style="color:white !important;">Book Now</a></span>
+    </button>
+  </div>
+</section>
+<style>
+  .pot {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  .pot.revealed {
+    transform: translateY(50px);
+    opacity:1;
+}
+.cta{
+    box-shadow: 0px 8px 32px 0 rgba(203, 204, 122, 0.37);
+background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgb(143, 145, 66);
+  padding: 3rem;
+}
+.cta h2,.cta p,.animated-btn{
+  position: relative;
+  bottom: 80px;
+}
+</style>
+<script>
+  const ctaObserverAlt = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const pots = document.querySelectorAll('.pot');
+      if (entry.isIntersecting) {
+        pots.forEach(pot => pot.classList.add('revealed'));
+      } else {
+        pots.forEach(pot => pot.classList.remove('revealed'));
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const ctaSection = document.getElementById('cta');
+  if (ctaSection) ctaObserverAlt.observe(ctaSection);
+</script>
+<!-- Swiper JS Initialization -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      640: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+</script>
+
+<style>
+  .swiper-pagination{
+    position: static !important;
+    margin-top: 10px !important;
+  }
+  .swiper-pagination-bullet {
+    background-color: #921212 !important;
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+    transition: transform 0.3s;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: rgb(145, 9, 9) !important;
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 10px #970505;
+}
+  </style>
+<!-- Alakan Residency Footer -->
+<footer class="alak-footer min-w-full relative right-4 top-16" style="margin: 0px ; width: 100vw ;">
+  <div class="alak-container">
+    <div class="alak-grid">
+      <!-- Logo and Description -->
+      <div class="alak-fade-up">
+        <img src="A-logo.png" alt="Alakan Residency" class="alak-logo" />
+        <p class="alak-text" style="color:#FFD700  !important;">Welcome to Alakan Residency. A budget-friendly hotel near Arulmigu Subramanya Swamy Temple, Tiruchendur, offering clean, hygienic rooms. Guest satisfaction is our #1 goal.</p>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="alak-fade-up delay-1">
+        <h3 style="color:#FFD700  !important;">Useful Links</h3>
+        <ul>
+          <li><a href="index.html"style="color:#FFD700  !important;">Gallery</a></li>
+          <li><a href="../contact-us/index.html"style="color:#FFD700  !important;">Contact Us</a></li>
+          <li><a href="../about-us/index.html"style="color:#FFD700  !important;">About Us</a></li>
+          <li><a href="../account/index.html"style="color:#FFD700  !important; ">My Bookings</a></li>
+          <li><a href="../cancellation-policy/index.html"style="color:#FFD700  !important; ">Cancellation Policy</a></li>
+          <li><a href="../accommodation-policy/index.html"style="color:#FFD700  !important;">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="alak-fade-up delay-2">
+        <h3 style="color:#FFD700  !important;">Contact Us</h3>
+        <ul>
+          <li style="color:#FFD700  !important;"><i class="las la-map-marker-alt"></i> 335/1 Taluk Office road, Tiruchendur, TN 628215</li>
+          <li style="color:#FFD700  !important;"><i class="las la-phone"></i> ‪+91 95142 52526‬</li>
+          <li style="color:#FFD700  !important;"><i class="las la-envelope"></i> bookme@alakanresidency.com</li>
+        </ul>
+        <div class="alak-social">
+          <a href="https://www.facebook.com/alakanresidency" target="_blank" style="color:#FFD700  !important;"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+
+      <!-- Language + Float Icon -->
+      <div class="alak-fade-up delay-3" b>
+        <h3 style="color:#FFD700  !important;">Languages</h3>
+        <select style="color:#FFD700  !important;">
+          <option >English</option>
+          <option >Tamil</option>
+        </select>
+        <div class="alak-icon-wrap alak-animate-float">
+          <img src="https://cdn-icons-png.flaticon.com/512/3176/3176364.png" alt="icon">
+        </div>
+      </div>
+    </div>
+
+    <!-- Subfooter -->
+    <div class="alak-subfooter alak-fade-up delay-4">
+      <div>© 2023 - 2024 Alakan Residency. Designed by Softek Square Pvt Ltd</div>
+      <div>All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+</div>
+   <script src="script.js"></script>
+
+</body>
+</html>

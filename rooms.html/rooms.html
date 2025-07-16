@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alakar Residency - Room Selection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --maroon: #A52626;
+            --maroon-dark: #7a1c1c;
+            --gold: #D4AF37;
+            --gold-light: #e8c874;
+            --black: #1A1A1A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    
+
+        body {
+         background: linear-gradient(to right, #f9d976, #b88d00);
+            color: white;
+            overflow-x: hidden;
+        }
+
+
+/* Loader */
+#loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to right, #f9d976, #b88d00);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#houseCanvas {
+  width: 250px;
+  height: 250px;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: #b80000;
+  font-weight: 600;
+  position: relative;
+  bottom: 60px;
+  left: 5px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+  position: fixed;
+  width: 100%;
+   background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 1000;
+  top: -100px;
+  opacity: 0;
+  animation: slideDown 1s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  position: relative;
+  align-items: center;
+}
+
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+}
+.nav-item.active{
+transition: all 3s;
+}
+.nav-item.active a {
+  color: rgb(117, 7, 7) !important;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  width: 60px;
+  background: linear-gradient(90deg, #d1b724, hwb(0 2% 47%));
+  transition: all 0.4s ease;
+  border-radius: 2px;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background: rgba(148, 12, 12, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin-top: 10px;
+  right: 0.1px;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+}
+.dropdown-menu a{
+    color: white !important;
+}
+.dropdown-menu a:hover{
+    color: #ffffff!important;
+    transition: all 1s ease-in;
+}
+.dropdown.open .dropdown-menu {
+  display: flex;
+}
+
+#dropdownArrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown.open #dropdownArrow {
+  transform: rotate(180deg);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px) !important;
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0 !important;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px)  !important;
+}
+
+
+        .slider {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider .list .item {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0 0 0 0;
+            transition: all 0.5s ease;
+        }
+
+        .slider .list .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .slider .list .item .content {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 90%;
+            max-width: 1140px;
+            left: 10%;
+            padding-right: 10%;
+            box-sizing: border-box;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .slider .list .item .content .title {
+            font-size: clamp(2rem, 5vw, 5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+
+        .slider .list .item .content .type {
+            font-size: clamp(1.2rem, 3vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--maroon);
+        }
+
+        .slider .list .item .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .slider .list .item .features .feature {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .slider .list .item .price {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .slider .list .item .description {
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .book-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .book-btn:hover {
+            background: var(--maroon-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .book-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .book-btn:hover::after {
+            left: 100%;
+        }
+
+        .thumbnail {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+            z-index: 100;
+            display: flex;
+            gap: 15px;
+            padding: 0 15px;
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .thumbnail::-webkit-scrollbar {
+            display: none;
+        }
+
+        .thumbnail .item {
+            width: 100px;
+            height: 150px;
+            flex-shrink: 0;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail .item.active {
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .thumbnail .item:hover {
+            transform: scale(1.05);
+        }
+
+        .thumbnail .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .arrowButtons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+
+        .arrowButtons button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(165, 38, 38, 0.7);
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .arrowButtons button:hover {
+            background-color: var(--maroon);
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        .slider .list .item.active .content .title,
+        .slider .list .item.active .content .type,
+        .slider .list .item.active .content .features,
+        .slider .list .item.active .content .price,
+        .slider .list .item.active .content .description,
+        .slider .list .item.active .content .book-btn {
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        .slider .list .item.active .content .title {
+            animation-delay: 0.3s;
+        }
+
+        .slider .list .item.active .content .type {
+            animation-delay: 0.4s;
+        }
+
+        .slider .list .item.active .content .features {
+            animation-delay: 0.5s;
+        }
+
+        .slider .list .item.active .content .price {
+            animation-delay: 0.6s;
+        }
+
+        .slider .list .item.active .content .description {
+            animation-delay: 0.7s;
+        }
+
+        .slider .list .item.active .content .book-btn {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .slider .list .item .content {
+                left: 5%;
+                padding-right: 5%;
+                width: 95%;
+            }
+
+            .thumbnail {
+                bottom: 20px;
+            }
+
+            .thumbnail .item {
+                width: 80px;
+                height: 120px;
+            }
+
+            .arrowButtons button {
+                width: 40px;
+                height: 40px;
+            }
+
+            .slider .list .item .features .feature {
+                font-size: 0.8rem;
+                padding: 3px 10px;
+            }
+             #houseCanvas {
+    width: 180px;
+    height: 180px;
+  }
+
+  .loading-text {
+    font-size: 1rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(78, 71, 71, 0.95);
+    padding: 1rem;
+    display: none;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .underline {
+    display: none;
+  }
+
+  .dropdown-menu {
+    position: static;
+    margin-top: 0;
+    padding-left:1rem;
+}
+ .arrowButtons button {
+  position:relative;
+  top:180px
+ }
+        }
+
+        @media (max-width: 480px) {
+            .slider .list .item .content {
+                top: 45%;
+                left: 5%;
+                width: 90%;
+                padding-right: 5%;
+            }
+
+            .thumbnail {
+                bottom: 15px;
+                gap: 10px;
+            }
+
+            .thumbnail .item {
+                width: 70px;
+                height: 100px;
+            }
+
+            .book-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body >
+   <div id="loader">
+    <canvas id="houseCanvas" width="300" height="300"></canvas>
+    <p class="loading-text">Preparing your luxury stay…</p>
+  </div>
+ <div id="content" style="display: none;">
+   <!-- Main Content -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+       <ul class="nav-list" id="nav-list">
+        <div class="underline" id="underline"></div>
+        <li class="nav-item"><a href="../index.html">Home</a></li>
+        <li class="nav-item active"><a href="rooms.html">Rooms</a></li>
+        <li class="nav-item "><a href="../gallery/gallery.html">Gallery</a></li>
+        <li class="nav-item"><a href="../contact us/contact.html">Contact Us</a></li>
+        <li class="nav-item dropdown" id="dropdown">
+          <a href="#" id="dropdownToggle">
+            Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
+          </a>
+           <ul class="dropdown-menu" id="dropdownMenu">
+            <li><a href="../services/services.html"style="color:white!important;">Services</a></li>
+            <li><a href="../policy/policy.html"style="color:white!important;">Policy</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div id="container">
+      <div class="slider">
+        <div class="list">
+            <div class="item active">
+                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Honeymoon Suite">
+                <div class="content">
+                    <h2 class="title">Honeymoon Suite</h2>
+                    <p class="type">Romantic Getaway</p>
+                    <div class="features">
+                        <span class="feature">King Bed</span>
+                        <span class="feature">Private Balcony</span>
+                        <span class="feature">55 sqm</span>
+                        <span class="feature">Champagne</span>
+                    </div>
+                    <p class="price">₹4500 / night</p>
+                    <p class="description">
+                        Celebrate your love in our specially designed honeymoon suite with romantic decor and premium amenities.
+                    </p>
+                    <button class="book-btn" onclick="bookRoom('Honeymoon Suite', 4500)">Book Now</button>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Business Room">
+                <div class="content">
+                    <h2 class="title">Business Room</h2>
+                    <p class="type">Productive Stay</p>
+                    <div class="features">
+                        <span class="feature">Work Desk</span>
+                        <span class="feature">High-speed WiFi</span>
+                        <span class="feature">35 sqm</span>
+                        <span class="feature">Meeting Space</span>
+                    </div>
+                    <p class="price">₹3200 / night</p>
+                    <p class="description">
+                        Designed for business travelers with a spacious work area, premium connectivity, and access to our business center.
+                    </p>
+                    <button class="book-btn" onclick="bookRoom('Business Room', 3200)">Book Now</button>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Pool View Room">
+                <div class="content">
+                    <h2 class="title">Pool View Room</h2>
+                    <p class="type">Refreshing Stay</p>
+                    <div class="features">
+                        <span class="feature">Queen Bed</span>
+                        <span class="feature">Pool Access</span>
+                        <span class="feature">35 sqm</span>
+                        <span class="feature">Sun Deck</span>
+                    </div>
+                    <p class="price">₹3300 / night</p>
+                    <p class="description">
+                        Wake up to views of our sparkling pool and enjoy direct access to our poolside relaxation areas.
+                    </p>
+                    <button class="book-btn" onclick="bookRoom('Pool View Room', 3300)">Book Now</button>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Deluxe Room">
+                <div class="content">
+                    <h2 class="title">Deluxe Room</h2>
+                    <p class="type">Luxury Accommodation</p>
+                    <div class="features">
+                        <span class="feature">King Bed</span>
+                        <span class="feature">Sea View</span>
+                        <span class="feature">40 sqm</span>
+                        <span class="feature">Free WiFi</span>
+                    </div>
+                    <p class="price">₹2500 / night</p>
+                    <p class="description">
+                        Our Deluxe Rooms offer a perfect blend of comfort and elegance with modern amenities and stunning views of the Arabian Sea.
+                    </p>
+                    <button class="book-btn" onclick="bookRoom('Deluxe Room', 2500)">Book Now</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="thumbnail">
+            <div class="item active" data-index="0">
+                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Honeymoon Suite">
+            </div>
+            <div class="item" data-index="1">
+                <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Business Room">
+            </div>
+            <div class="item" data-index="2">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Pool View Room">
+            </div>
+            <div class="item" data-index="3">
+                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Deluxe Room">
+            </div>
+        </div>
+
+        <div class="arrowButtons">
+            <button class="prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+<style>
+/* ======= Alakan Footer Styles ======= */
+.alak-footer {
+  background: linear-gradient(to right, #800000, #5a0000, #450000); /* Maroon gradient */
+  color: #FFD700; /* Gold text */
+  padding: 60px 20px 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.alak-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+body::-webkit-scrollbar{
+  display:none;
+}
+.alak-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.alak-grid > div {
+  flex: 1 1 220px;
+  min-width: 200px;
+}
+
+.alak-logo {
+  width: 160px;
+  margin-bottom: 20px;
+}
+
+.alak-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.alak-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp2 1s forwards;
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
+.delay-4 { animation-delay: 1.2s; }
+
+@keyframes fadeInUp2 {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alak-footer h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #FFD700; /* Gold headings */
+}
+
+.alak-footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.alak-footer li {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.alak-footer a {
+  text-decoration: none;
+  color: #FFD700; /* Gold links */
+  transition: color 0.3s;
+}
+
+.alak-footer a:hover {
+  color: #fff;
+}
+
+.alak-social a {
+  font-size: 24px;
+  margin-top: 10px;
+  display: inline-block;
+  color: #FFD700; /* Gold social icons */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.alak-social a:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+.alak-icon-wrap img {
+  width: 40px;
+  height: 40px;
+  margin-top: 30px;
+}
+
+.alak-subfooter {
+  border-top: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+  margin-top: 50px;
+  padding-top: 20px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+/* Animation: Floating icon */
+.alak-animate-float {
+  animation: floatY 3s ease-in-out infinite;
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ======= Language Section Style ======= */
+.alak-fade-up select {
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(255, 215, 0, 0.1); /* Light gold background */
+  border: 2px solid #FFD700; /* Gold border */
+  border-radius: 8px;
+  font-size: 14px;
+  color: #FFD700; /* Gold text */
+  font-weight: bold;
+  transition: border 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill%3D'%23FFD700'%20height%3D'20'%20viewBox%3D'0%200%2024%2024'%20width%3D'20'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+}
+
+.alak-fade-up select:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+.alak-fade-up h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #FFD700;
+}
+
+/* Floating Icon Style */
+.alak-icon-wrap {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.alak-icon-wrap img {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  transition: transform 0.4s ease;
+}
+
+.alak-icon-wrap img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+</style>
+
+<!-- Alakan Residency Footer -->
+<footer class="alak-footer min-w-full relative right-4 top-16" style="margin: 0px ; width: 100vw ;">
+  <div class="alak-container">
+    <div class="alak-grid">
+      <!-- Logo and Description -->
+      <div class="alak-fade-up">
+        <img src="A-logo.png" alt="Alakan Residency" class="alak-logo" />
+        <p class="alak-text">Welcome to Alakan Residency. A budget-friendly hotel near Arulmigu Subramanya Swamy Temple, Tiruchendur, offering clean, hygienic rooms. Guest satisfaction is our #1 goal.</p>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="alak-fade-up delay-1">
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="index.html">Gallery</a></li>
+          <li><a href="../contact-us/index.html">Contact Us</a></li>
+          <li><a href="../about-us/index.html">About Us</a></li>
+          <li><a href="../account/index.html">My Bookings</a></li>
+          <li><a href="../cancellation-policy/index.html">Cancellation Policy</a></li>
+          <li><a href="../accommodation-policy/index.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="alak-fade-up delay-2">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="las la-map-marker-alt"></i> 335/1 Taluk Office road, Tiruchendur, TN 628215</li>
+          <li><i class="las la-phone"></i> ‪+91 95142 52526‬</li>
+          <li><i class="las la-envelope"></i> bookme@alakanresidency.com</li>
+        </ul>
+        <div class="alak-social">
+          <a href="https://www.facebook.com/alakanresidency" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+
+      <!-- Language + Float Icon -->
+      <div class="alak-fade-up delay-3" b>
+        <h3>Languages</h3>
+        <select>
+          <option>English</option>
+          <option>Tamil</option>
+        </select>
+        <div class="alak-icon-wrap alak-animate-float">
+          <img src="https://cdn-icons-png.flaticon.com/512/3176/3176364.png" alt="icon">
+        </div>
+      </div>
+    </div>
+
+    <!-- Subfooter -->
+    <div class="alak-subfooter alak-fade-up delay-4">
+      <div>© 2023 - 2024 Alakan Residency. Designed by Softek Square Pvt Ltd</div>
+      <div>All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    <script>
+        // Room data
+        const rooms = [
+            {
+                name: "Honeymoon Suite",
+                type: "Romantic Getaway",
+                price: 4500,
+                image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww",
+                features: ["King Bed", "Private Balcony", "55 sqm", "Champagne"],
+                description: "Celebrate your love in our specially designed honeymoon suite with romantic decor and premium amenities."
+            },
+            {
+                name: "Business Room",
+                type: "Productive Stay",
+                price: 3200,
+                image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D",
+                features: ["Work Desk", "High-speed WiFi", "35 sqm", "Meeting Space"],
+                description: "Designed for business travelers with a spacious work area, premium connectivity, and access to our business center."
+            },
+            {
+                name: "Pool View Room",
+                type: "Refreshing Stay",
+                price: 3300,
+                image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D",
+                features: ["Queen Bed", "Pool Access", "35 sqm", "Sun Deck"],
+                description: "Wake up to views of our sparkling pool and enjoy direct access to our poolside relaxation areas."
+            },
+            {
+                name: "Deluxe Room",
+                type: "Luxury Accommodation",
+                price: 2500,
+                image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww",
+                features: ["King Bed", "Sea View", "40 sqm", "Free WiFi"],
+                description: "Our Deluxe Rooms offer a perfect blend of comfort and elegance with modern amenities and stunning views of the Arabian Sea."
+            }
+        ];
+
+        // Slider functionality
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.list .item');
+        const thumbnails = document.querySelectorAll('.thumbnail .item');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+
+        function showSlide(index) {
+            // Hide all slides
+            items.forEach(item => {
+                item.classList.remove('active');
+                item.style.opacity = '0';
+            });
+            
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            // Show selected slide
+            items[index].classList.add('active');
+            thumbnails[index].classList.add('active');
+            
+            // Trigger animations
+            setTimeout(() => {
+                items[index].style.opacity = '1';
+            }, 50);
+            
+            currentIndex = index;
+        }
+
+        function nextSlide() {
+            let newIndex = (currentIndex + 1) % items.length;
+            showSlide(newIndex);
+        }
+
+        function prevSlide() {
+            let newIndex = (currentIndex - 1 + items.length) % items.length;
+            showSlide(newIndex);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showSlide(index);
+            });
+        });
+
+        // Auto slide
+        let autoSlide = setInterval(nextSlide, 5000);
+
+        // Pause on hover
+        const slider = document.querySelector('.slider');
+        slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+        slider.addEventListener('mouseleave', () => {
+            autoSlide = setInterval(nextSlide, 5000);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Book room function
+        function bookRoom(roomName, roomPrice) {
+            // Store selected room data in localStorage
+            const selectedRoom = rooms.find(room => room.name === roomName);
+            localStorage.setItem('selectedRoom', JSON.stringify(selectedRoom));
+            
+            // Redirect to booking page
+            window.location.href = '../booking.html/booking.html';
+        }
+
+        // Initialize slider
+        showSlide(0);
+        const canvas = document.getElementById("houseCanvas");
+const ctx = canvas.getContext("2d");
+ctx.lineWidth = 4;
+ctx.lineJoin = "round";
+ctx.lineCap = "round";
+
+const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+gradient.addColorStop(0, "#e6cd7d");
+gradient.addColorStop(1, "#7a1c1c");
+ctx.strokeStyle = gradient;
+
+const lines = [
+  [[150, 80], [100, 120]],
+  [[150, 80], [200, 120]],
+  [[100, 120], [100, 200]],
+  [[200, 120], [200, 200]],
+  [[100, 200], [200, 200]],
+  [[150, 120], [150, 200]],
+  [[100, 160], [150, 160]],
+  [[150, 160], [200, 160]],
+  [[125, 160], [125, 200]],
+  [[100, 180], [150, 180]]
+];
+
+let step = 0;
+const logo = new Image();
+logo.src = "A-logo.png";
+
+function drawSegment(segment) {
+  ctx.beginPath();
+  ctx.moveTo(segment[0][0], segment[0][1]);
+  ctx.lineTo(segment[1][0], segment[1][1]);
+  ctx.stroke();
+}
+
+function animateDrawing() {
+if (step < lines.length) {
+drawSegment(lines[step]);
+step++;
+setTimeout(animateDrawing, 300);
+} else {
+setTimeout(() => {
+// Draw logo in the middle
+let alpha = 0;
+
+const fadeIn = setInterval(() => {
+ctx.clearRect(125, 107, 50, 50);// Clean full spot
+ctx.globalAlpha = alpha;
+ctx.drawImage(logo, 105, 100, 80, 80);
+alpha += 0.05;
+
+if (alpha >= 1) {
+clearInterval(fadeIn);
+ctx.globalAlpha = 1;
+
+// Wait and then show content
+setTimeout(() => {
+document.getElementById("loader").style.display = "none";
+document.getElementById("content").style.display = "block";
+}, 1200);
+}
+
+},50);
+},500);
+}
+}
+
+// Underline move
+const navItems = document.querySelectorAll(".nav-item");
+const underline = document.getElementById("underline");
+
+function moveUnderline(target) {
+  const rect = target.getBoundingClientRect();
+  const navRect = target.parentElement.getBoundingClientRect();
+  const left = rect.left - navRect.left;
+  underline.style.left = `${left}px`;
+  underline.style.width =` ${rect.width}px`;
+}
+
+navItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    document.querySelector(".nav-item.active")?.classList.remove("active");
+    item.classList.add("active");
+    moveUnderline(item);
+  });
+});
+
+// Hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const navList = document.getElementById("nav-list");
+
+hamburger.addEventListener("click", () => {
+  navList.classList.toggle("show");
+  hamburger.classList.toggle("active");
+});
+
+// Dropdown toggle
+const dropdown = document.getElementById("dropdown");
+const dropdownToggle = document.getElementById("dropdownToggle");
+
+dropdownToggle.addEventListener("click", (e) => {
+  e.preventDefault();
+  dropdown.classList.toggle("open");
+});
+
+document.addEventListener("click", (e) => {
+  if (!dropdown.contains(e.target) && !dropdownToggle.contains(e.target)) {
+    dropdown.classList.remove("open");
+  }
+});
+window.onload = () => {
+  const active = document.querySelector(".nav-item.active");
+  if (active) moveUnderline(active);
+  animateDrawing();
+};
+    </script>
+</body>
+</html>

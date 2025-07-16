@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – Alakarz Residency</title>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body>
+
+  <div id="container">
+     <div id="loader">
+    <canvas id="houseCanvas" width="300" height="300"></canvas>
+    <p class="loading-text">Preparing your luxury stay…</p>
+  </div>
+ <div id="content" style="display: none;">
+   <!-- Main Content -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+   <ul class="nav-list" id="nav-list">
+        <div class="underline" id="underline"></div>
+        <li class="nav-item "><a href="../index.html"><h1></h1>Home</a></li>
+        <li class="nav-item"><a href="../rooms.html/rooms.html">Rooms</a></li>
+        <li class="nav-item"><a href="../gallery/gallery.html">Gallery</a></li>
+        <li class="nav-item active"><a href="contact.html">Contact Us</a></li>
+        <li class="nav-item dropdown" id="dropdown">
+          <a href="#" id="dropdownToggle">
+            Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
+          </a>
+           <ul class="dropdown-menu" id="dropdownMenu">
+            <li><a href="../services/services.html"style="color:white!important;">Services</a></li>
+            <li><a href="../policy/policy.html"style="color:white!important;">Policy</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="animated-bg">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+  </div>
+
+  <section class="contact-wrapper">
+    <div class="contact-header">
+      <h1><span>Contact</span> Alakarz Residency</h1>
+      <p>We are always here to assist you</p>
+    </div>
+
+    <div class="contact-flex">
+      <div class="contact-card fade-in glass">
+        <h2>Address</h2>
+        <p>335/1 Taluk Office Road,<br>Tiruchendur, Tamil Nadu 628215, India.</p>
+
+        <h2>Phone</h2>
+        <p>‪+91 99655 45466‬<br>‪+91 95142 52526‬</p>
+
+        <h2> Email</h2>
+        <p>bookme@alakanresidency.com</p>
+      </div>
+
+      <div class="map-wrapper fade-in">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.014396627947!2d78.12322881482712!3d8.49798029941912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b03901636ae58e7%3A0x53b3cf86f4e840ba!2sAlakan%20Residency!5e0!3m2!1sen!2sin!4v1588507497410!5m2!1sen!2sin" 
+          loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" style="z-index: 1000;display: block !important;"></iframe>
+      </div>
+    </div>
+    
+  </section>
+  <style>
+/* ======= Alakan Footer Styles ======= */
+.alak-footer {
+  background: linear-gradient(to right, #800000, #5a0000, #450000); /* Maroon gradient */
+  color: #FFD700; /* Gold text */
+  padding: 60px 20px 30px;
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  height:70vh;
+  top:500px;
+}
+
+.alak-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.alak-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.alak-grid > div {
+  flex: 1 1 220px;
+  min-width: 200px;
+}
+
+.alak-logo {
+  width: 160px;
+  margin-bottom: 20px;
+}
+
+.alak-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.alak-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp2 1s forwards;
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
+.delay-4 { animation-delay: 1.2s; }
+
+@keyframes fadeInUp2 {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alak-footer h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #FFD700; /* Gold headings */
+}
+
+.alak-footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.alak-footer li {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.alak-footer a {
+  text-decoration: none;
+  color: #FFD700; /* Gold links */
+  transition: color 0.3s;
+}
+
+.alak-footer a:hover {
+  color: #fff;
+}
+
+.alak-social a {
+  font-size: 24px;
+  margin-top: 10px;
+  display: inline-block;
+  color: #FFD700; /* Gold social icons */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.alak-social a:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+.alak-icon-wrap img {
+  width: 40px;
+  height: 40px;
+  margin-top: 30px;
+}
+
+.alak-subfooter {
+  border-top: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+  margin-top: 50px;
+  padding-top: 20px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+/* Animation: Floating icon */
+.alak-animate-float {
+  animation: floatY 3s ease-in-out infinite;
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ======= Language Section Style ======= */
+.alak-fade-up select {
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(255, 215, 0, 0.1); /* Light gold background */
+  border: 2px solid #FFD700; /* Gold border */
+  border-radius: 8px;
+  font-size: 14px;
+  color: #FFD700; /* Gold text */
+  font-weight: bold;
+  transition: border 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill%3D'%23FFD700'%20height%3D'20'%20viewBox%3D'0%200%2024%2024'%20width%3D'20'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+}
+
+.alak-fade-up select:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+.alak-fade-up h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #FFD700;
+}
+
+/* Floating Icon Style */
+.alak-icon-wrap {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.alak-icon-wrap img {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  transition: transform 0.4s ease;
+}
+
+.alak-icon-wrap img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+</style>
+
+<!-- Alakan Residency Footer -->
+<footer class="alak-footer min-w-full relative right-4 top-16" style="margin: 0px ; width: 100vw ;">
+  <div class="alak-container">
+    <div class="alak-grid">
+      <!-- Logo and Description -->
+      <div class="alak-fade-up">
+        <img src="A-logo.png" alt="Alakan Residency" class="alak-logo" />
+        <p class="alak-text">Welcome to Alakan Residency. A budget-friendly hotel near Arulmigu Subramanya Swamy Temple, Tiruchendur, offering clean, hygienic rooms. Guest satisfaction is our #1 goal.</p>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="alak-fade-up delay-1">
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="index.html">Gallery</a></li>
+          <li><a href="../contact-us/index.html">Contact Us</a></li>
+          <li><a href="../about-us/index.html">About Us</a></li>
+          <li><a href="../account/index.html">My Bookings</a></li>
+          <li><a href="../cancellation-policy/index.html">Cancellation Policy</a></li>
+          <li><a href="../accommodation-policy/index.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="alak-fade-up delay-2">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="las la-map-marker-alt"></i> 335/1 Taluk Office road, Tiruchendur, TN 628215</li>
+          <li><i class="las la-phone"></i> ‪+91 95142 52526‬</li>
+          <li><i class="las la-envelope"></i> bookme@alakanresidency.com</li>
+        </ul>
+        <div class="alak-social">
+          <a href="https://www.facebook.com/alakanresidency" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+
+      <!-- Language + Float Icon -->
+      <div class="alak-fade-up delay-3" b>
+        <h3>Languages</h3>
+        <select>
+          <option>English</option>
+          <option>Tamil</option>
+        </select>
+        <div class="alak-icon-wrap alak-animate-float">
+          <img src="https://cdn-icons-png.flaticon.com/512/3176/3176364.png" alt="icon">
+        </div>
+      </div>
+    </div>
+
+    <!-- Subfooter -->
+    <div class="alak-subfooter alak-fade-up delay-4">
+      <div>© 2023 - 2024 Alakan Residency. Designed by Softek Square Pvt Ltd</div>
+      <div>All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+  </div>
+
+  <script src="contact.js"></script>
+</body>
+</html>

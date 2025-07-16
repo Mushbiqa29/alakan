@@ -1,0 +1,354 @@
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+body,html {
+  font-family: 'Segoe UI', sans-serif;
+  background:linear-gradient(to right, #f9d976, #b88d00);
+  height: 200vh;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+body::-webkit-scrollbar{
+  display:none;
+}
+/* Loader */
+#loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#houseCanvas {
+  width: 250px;
+  height: 250px;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: #b80000;
+  font-weight: 600;
+  position: relative;
+  bottom: 60px;
+  left: 5px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+  position: fixed;
+  width: 100%;
+   background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 1000;
+  top: -100px;
+  opacity: 0;
+  animation: slideDown 1s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  position: relative;
+  align-items: center;
+}
+
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+}
+.nav-item.active{
+transition: all 3s;
+}
+.nav-item.active a {
+  color: rgb(117, 7, 7) !important;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  width: 60px;
+  background: linear-gradient(90deg, #d1b724, hwb(0 2% 47%));
+  transition: all 0.4s ease;
+  border-radius: 2px;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background: rgba(148, 12, 12, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin-top: 10px;
+  right: 0.1px;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+}
+.dropdown-menu a{
+    color: white !important;
+}
+.dropdown-menu a:hover{
+    color: #ffffff!important;
+    transition: all 1s ease-in;
+}
+.dropdown.open .dropdown-menu {
+  display: flex;
+}
+
+#dropdownArrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown.open #dropdownArrow {
+  transform: rotate(180deg);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px) !important;
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0 !important;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px)  !important;
+}
+
+
+/* Animated Gradient Circles */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  overflow: hidden;
+}
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 10s infinite ease-in-out;
+}
+.circle1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(#ffd700, transparent);
+  top: -100px;
+  left: -100px;
+}
+.circle2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(#fff8b8, transparent);
+  bottom: -100px;
+  right: -100px;
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+/* Wrapper */
+.contact-wrapper {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+  position:relative;
+  top:200px;
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.contact-header h1 {
+  font-size: 2.8rem;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+.contact-header h1 span {
+  color: black;
+  background: linear-gradient(to right, #ffd700, #b10b0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.contact-header p {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #eee;
+}
+
+/* Flex Layout */
+.contact-flex {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Contact Card */
+.contact-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 2rem;
+  flex: 1 1 350px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease;
+}
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+.contact-card h2 {
+  color: #be1919;
+  margin-bottom: 0.4rem;
+}
+.contact-card p {
+  margin-bottom: 1rem;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* Map */
+.map-wrapper {
+  flex: 1 1 450px;
+  height: 100%;
+  min-height: 360px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+.map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  position: absolute;
+  border: none;
+  border-radius: 20px;
+}
+
+/* Animations on Scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-header h1 {
+    font-size:2rem;
+}
+ #houseCanvas {
+    width: 180px;
+    height: 180px;
+  }
+
+  .loading-text {
+    font-size: 1rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(78, 71, 71, 0.95);
+    padding: 1rem;
+    display: none;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .underline {
+    display: none;
+  }
+
+  .dropdown-menu {
+    position: static;
+    margin-top: 0;
+    padding-left:1rem;
+}
+.alak-footer {
+  height: 1120px !important;
+}
+}
