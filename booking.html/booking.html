@@ -982,7 +982,7 @@ transition: all 3s;
           <a href="#" id="dropdownToggle">
             Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
           </a>
-           <ul class="dropdown-menu" id="dropdownMenu">
+           <ul class="dropdown-menu" id="dropdownMenu" style="list-style-type: none !important;">
             <li><a href="../services/services.html"style="color:white!important;">Services</a></li>
             <li><a href="../policy/policy.html"style="color:white!important;">Policy</a></li>
           </ul>
@@ -1239,8 +1239,11 @@ transition: all 3s;
   font-family: 'Segoe UI', sans-serif;
   position: relative;
   top:200px;
+right:15px;
 }
-
+body::-webkit-scrollbar{
+  display:none;
+}
 .alak-container {
   max-width: 1200px;
   margin: 0 auto;

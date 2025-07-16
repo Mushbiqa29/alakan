@@ -553,7 +553,7 @@ body button:hover {
 #cta img{
   transform: scale(0.8);
   left: -15px !important;
-  top: 380px;
+  top: 370px;
 }
 .alak-grid {
     flex-direction: column;
