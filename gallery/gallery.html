@@ -3,57 +3,1101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alakan Residency gallery</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-  />
+  <title>Alakan Residency Gallery</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+  * {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    list-style: none;
+  }
+
+  body, html {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f9d976, #b88d00, #f9d976);
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  
+
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    top: -100px;
+    opacity: 0;
+    animation: slideDown 1s ease forwards;
+    transition: all 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    0% {
+      top: -100px;
+      opacity: 0;
+    }
+    100% {
+      top: 0;
+      opacity: 1;
+    }
+  }
+
+  .logo img {
+    height: 50px;
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover img {
+    transform: scale(1.05);
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    position: relative;
+    align-items: center;
+  }
+
+  .nav-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .nav-item a:hover {
+    color: #f9d976 !important;
+  }
+
+  .nav-item.active a {
+    color: #f9d976 !important;
+  }
+
+  .underline {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    width: 60px;
+    background: linear-gradient(90deg, #f9d976, #b88d00);
+    transition: all 0.4s ease;
+    border-radius: 2px;
+  }
+
+  /* Dropdown */
+  .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    margin-top: 10px;
+    right: 0;
+    padding: 0.5rem 0;
+    z-index: 1000;
+    min-width: 200px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .dropdown-menu li {
+    padding: 0.5rem 1.5rem;
+  }
+
+  .dropdown-menu a {
+    color: white !important;
+    display: block;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-menu a:hover {
+    color: #f9d976 !important;
+    padding-left: 1.2rem;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: flex;
+  }
+
+  #dropdownArrow {
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+    margin-left: 5px;
+  }
+
+  .dropdown.open #dropdownArrow {
+    transform: rotate(180deg);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Main Content */
+  .main-content {
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .gallery-hero {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .gallery-hero-content {
+    max-width: 800px;
+  }
+
+  .gallery-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease;
+  }
+
+  .gallery-hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease 0.3s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Gallery Section */
+  .gallery-section {
+    padding: 5rem 2rem;
+    position: relative;
+    background-color: #fff;
+  }
+
+  /* Flower decorations - Added from your original code */
+  .flower {
+    position: absolute;
+    width: 350px;
+    height: auto;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .flower-top-left {
+    top: -50px;
+    left: -30px;
+    transform: rotate(15deg);
+  }
+
+  .flower-bottom-right {
+    bottom: -190px;
+    right: -50px;
+    transform: rotate(160deg);
+  }
+
+  @media (max-width: 768px) {
+    .flower {
+      width: 100px;
+    }
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #f9d976, #b88d00);
+  }
+
+  .section-header p {
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Gallery Categories */
+  .gallery-categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-btn {
+    padding: 0.5rem 1.5rem;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .category-btn.active, .category-btn:hover {
+    background: linear-gradient(to right, #f9d976, #b88d00);
+    color: white;
+  }
+
+  /* Gallery Grid - Updated with your card rotation effect */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    height: 250px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+     transition: all 3s;
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.07) rotateY(10deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .gallery-item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 1.5rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-item-overlay {
+    transform: translateY(0);
+  }
+
+  .gallery-item h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .gallery-item p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  /* View More Button - Updated with your button hover effect */
+  .view-more {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .view-more-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    color: #fff;
+    background: #d64343;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 4px 15px rgba(214, 67, 67, 0.3);
+  }
+
+  /* Shine effect - From your original code */
+  .view-more-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-25deg);
+    transition: left 0.5s;
+  }
+
+  /* On hover - From your original code */
+  .view-more-btn:hover::after {
+    left: 125%;
+  }
+
+  .view-more-btn:hover {
+    background: #bb1e1e;
+    transform: scale(1.05);
+  }
+
+  /* Testimonials Section */
+  .testimonials-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+    padding: 5rem 2rem;
+    color: white;
+    text-align: center;
+  }
+
+  .testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .testimonials-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .testimonials-header p {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .testimonial-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .testimonial-text::before,
+  .testimonial-text::after {
+    content: '"';
+    font-size: 2rem;
+    color: #f9d976;
+    opacity: 0.5;
+  }
+
+  .testimonial-text::before {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+  }
+
+  .testimonial-text::after {
+    position: absolute;
+    bottom: -25px;
+    right: -10px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+  }
+
+  .author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid #f9d976;
+  }
+
+  .author-info h4 {
+    margin-bottom: 0.2rem;
+  }
+
+  .author-info p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+
+  /* Gallery Modal */
+  .gallery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .gallery-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: white;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .close-modal {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .close-modal:hover {
+    color: #f9d976;
+    transform: rotate(90deg);
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 1200px;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-main-image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-thumbnails {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  .modal-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .modal-thumbnail:hover, .modal-thumbnail.active {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(249, 217, 118, 0.5);
+  }
+
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+  }
+
+  .modal-nav-btn {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .modal-nav-btn:hover {
+    background: rgba(249, 217, 118, 0.8);
+    transform: scale(1.1);
+  }
+
+  /* Footer */
+  .footer {
+    background: #111;
+    color: white;
+    padding: 4rem 2rem 2rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-logo {
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-logo img {
+    height: 50px;
+  }
+
+  .footer-about p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .footer-social a {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    background: #f9d976;
+    color: #111;
+    transform: translateY(-5px);
+  }
+
+  .footer-links h3, .footer-contact h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .footer-links h3::after, .footer-contact h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #f9d976;
+  }
+
+  .footer-links ul {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-links a {
+    color: white;
+    opacity: 0.8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .footer-links a:hover {
+    color: #f9d976;
+    opacity: 1;
+    transform: translateX(5px);
+  }
+
+  .footer-contact p {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  .footer-contact i {
+    margin-right: 10px;
+    color: #f9d976;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+
+  /* Back to Top Button */
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #f9d976;
+    color: #111;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    background: #b88d00;
+    transform: translateY(-5px);
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .gallery-hero h1 {
+      font-size: 2.8rem;
+    }
+    
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-list {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.5s ease;
+      z-index: 1000;
+      padding: 2rem;
+    }
+
+    .nav-list.show {
+      left: 0;
+    }
+
+    .nav-item {
+      width: 100%;
+      text-align: center;
+    }
+
+    .nav-item a {
+      font-size: 1.2rem;
+      padding: 1rem 0;
+      display: block;
+    }
+
+    .dropdown-menu {
+      position: static;
+      background: transparent;
+      box-shadow: none;
+      margin-top: 0;
+      padding: 0;
+      display: none;
+    }
+
+    .dropdown.open .dropdown-menu {
+      display: flex;
+    }
+
+    .dropdown-menu li {
+      padding: 0.5rem 0;
+    }
+
+    .dropdown-menu a {
+      padding: 0.5rem 0 !important;
+    }
+
+    .underline {
+      display: none;
+    }
+
+    .gallery-hero {
+      height: 50vh;
+      position :relative;
+      top:50px;
+    }
+
+    .gallery-hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .gallery-hero p {
+      font-size: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+    }
+
+    .testimonials-header h2 {
+      font-size: 2rem;
+    }
+    .flower-top-left{
+      transform:scale(2);
+      position:relative;
+      top:-90px;
+
+    }
+    .flower-bottom-right{
+      transform:scale(2);
+      bottom:-30px;
+      z-index: 1000;
+
+    }
+  }
+
+  @media (max-width: 576px) {
+    .gallery-hero {
+      height: 40vh;
+    }
+
+    .gallery-hero h1 {
+      font-size: 1.8rem;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Animation Classes */
+  .fade-in {
+    animation: fadeIn 1s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .slide-up {
+    animation: slideUp 1s ease forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .delay-1 {
+    animation-delay: 0.2s;
+  }
+
+  .delay-2 {
+    animation-delay: 0.4s;
+  }
+
+  .delay-3 {
+    animation-delay: 0.6s;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #f9d976, #b88d00);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b88d00;
+  }
+  </style>
 </head>
 <body>
-    <style>
-  :root {
-    --alakaz-maroon: #A52626;
-    --alakaz-maroon-hover: #C03030;
-    --alakaz-gradient: linear-gradient(135deg, #A52626, #C03030);
-  }
-body::-webkit-scrollbar{
-  display:none;
+  <style>
+/* ======= FILTER ANIMATION STYLES ======= */
+.gallery-grid {
+  position: relative;
+  min-height: 500px;
+  perspective: 1000px;
 }
 
-  /* Buttons and call-to-actions */
-  button, .book-btn, .btn, input[type="submit"] {
-    background-color: var(--alakaz-maroon) !important;
-    color: #fff !important;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-weight: 600;
-    transition: 0.3s ease;
-    box-shadow: 0 3px 10px rgba(165, 38, 38, 0.2);
-  }
+.gallery-item {
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.5, 0, 0.5, 1);
+  transform-origin: center;
+}
 
-  button:hover, .book-btn:hover, .btn:hover {
-    background-color: var(--alakaz-maroon-hover) !important;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(192, 48, 48, 0.4);
-  }
+/* Initial hidden state */
+.gallery-item.filtered {
+  transform: rotateY(-90deg) scale(0.8);
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  filter: blur(2px);
+}
 
-  /* Optional gradient background use */
-  .alakaz-maroon-bg {
-    background: var(--alakaz-gradient);
-    color: #fff;
+/* Visible state */
+.gallery-item.active {
+  transform: rotateY(0deg) scale(1);
+  opacity: 1;
+  position: relative;
+  pointer-events: auto;
+  filter: blur(0);
+}
+
+/* Staggered animations */
+.gallery-item.active:nth-child(1) { transition-delay: 0.1s; }
+.gallery-item.active:nth-child(2) { transition-delay: 0.2s; }
+.gallery-item.active:nth-child(3) { transition-delay: 0.3s; }
+.gallery-item.active:nth-child(4) { transition-delay: 0.4s; }
+.gallery-item.active:nth-child(5) { transition-delay: 0.5s; }
+.gallery-item.active:nth-child(6) { transition-delay: 0.6s; }
+
+/* Button active state */
+.category-btn.active {
+  background: linear-gradient(45deg, #f9d976, #b88d00) !important;
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 </style>
 
-  <!-- Loader -->
-  <div id="loader">
-    <canvas id="houseCanvas" width="300" height="300"></canvas>
-    <p class="loading-text">Preparing your luxury stay…</p>
-  </div>
- <div id="content" style="display: none;">
-   <!-- Main Content -->
+<script>
+// ======= FILTER FUNCTIONALITY =======
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize all items as visible
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.classList.add('active');
+  });
+
+  // Filter button click handler
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const category = this.dataset.category;
+      animateFilterChange(category);
+    });
+  });
+});
+
+function animateFilterChange(category) {
+  const items = document.querySelectorAll('.gallery-item');
+  const buttons = document.querySelectorAll('.category-btn');
+  
+  // Update active button
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+    if(btn.dataset.category === category) {
+      btn.classList.add('active');
+    }
+  });
+
+  // First hide all items with animation
+  items.forEach(item => {
+    item.classList.remove('active');
+    item.classList.add('filtered');
+  });
+
+  // Then show matching items with staggered animation
+  setTimeout(() => {
+    let visibleItems = 0;
+    items.forEach((item, index) => {
+      if(category === 'all' || item.dataset.category === category) {
+        setTimeout(() => {
+          item.classList.remove('filtered');
+          item.classList.add('active');
+        }, visibleItems * 100); // 100ms delay between each
+        visibleItems++;
+      }
+    });
+  }, 600); // Wait for hide animation to complete
+}
+
+// ======= SCROLL ANIMATION ======= 
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('scroll-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.1});
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    observer.observe(item);
+  });
+}
+
+// Initialize when page loads
+window.addEventListener('load', function() {
+  initScrollAnimations();
+});
+</script>
+
+  <!-- Main Content -->
+
+    <!-- Navbar -->
     <nav class="navbar">
       <div class="logo">
         <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
@@ -61,305 +1105,490 @@ body::-webkit-scrollbar{
       <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
       </div>
-       <ul class="nav-list" id="nav-list">
+      <ul class="nav-list" id="nav-list">
         <div class="underline" id="underline"></div>
         <li class="nav-item"><a href="../index.html">Home</a></li>
-        <li class="nav-item "><a href="../rooms.html/rooms.html">Rooms</a></li>
-        <li class="nav-item active"><a href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a href="../rooms.html/rooms.html">Rooms</a></li>
+        <li class="nav-item active"><a href="#">Gallery</a></li>
         <li class="nav-item"><a href="../contact us/contact.html">Contact Us</a></li>
         <li class="nav-item dropdown" id="dropdown">
           <a href="#" id="dropdownToggle">
             Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
           </a>
- <ul class="dropdown-menu" id="dropdownMenu">
-            <li><a href="../services/services.html"style="color:white!important;">Services</a></li>
-            <li><a href="../policy/policy.html"style="color:white!important;">Policy</a></li>
+          <ul class="dropdown-menu" id="dropdownMenu">
+            <li><a href="../services/services.html">Services</a></li>
+            <li><a href="../policy/policy.html">Policy</a></li>
           </ul>
         </li>
       </ul>
     </nav>
 
-  <div id="content">
-  <section class="gallery-section">
-
-    <!-- Decorative Flower Images -->
-    <img src="flowe.png" alt="Flower Top Left" class="flower flower-top-left" />
-    <img src="flowe.png" alt="Flower Bottom Right" class="flower flower-bottom-right" />
-
-    <!-- Gallery Title and Cards -->
-    <div class="collection">
-        <h1 class="gallery-title" style="color:  #A52626;">Our Gallery</h1>
-    <div class="gallery-carousel" id="carousel">
-      <!-- Each card represents a section with 4 gallery images -->
-      <div class="gallery-card" onclick="openGallery(0)">
-        <img src="https://alakanresidency.com/wp-content/uploads/2023/06/Corridor-1-scaled.jpg" alt="Corridor">
-        <div class="card-text"><h2>Corridor View</h2></div>
+    <!-- Hero Section -->
+    <section class="gallery-hero">
+      <div class="gallery-hero-content">
+        <h1 class="fade-in">Our Gallery</h1>
+        <p class="fade-in delay-1">Discover the exquisite spaces and amenities that make Alakan Residency your perfect retreat. Browse through our collection of images showcasing our luxurious accommodations and facilities.</p>
       </div>
-      <div class="gallery-card" onclick="openGallery(1)">
-        <img src="https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWx8ZW58MHx8MHx8fDA%3D" alt="Hotel">
-        <div class="card-text"><h2>Hotel View</h2></div>
-      </div>
-      <div class="gallery-card" onclick="openGallery(2)">
-        <img src="https://alakanresidency.com/wp-content/uploads/2023/06/reception-8-scaled.jpg" alt="Reception">
-        <div class="card-text"><h2>Reception</h2></div>
-      </div>
-      <div class="gallery-card" onclick="openGallery(3)">
-        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWx8ZW58MHx8MHx8fDA%3D" alt="Temple">
-        <div class="card-text"><h2>Room View</h2></div>
-      </div>
-            <div class="gallery-card" onclick="openGallery(4)">
-        <img src="https://images.unsplash.com/photo-1676642063019-1a713b9abca7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGhvdGVsJTIwZ2FyZGVuJTIwdmlld3xlbnwwfHwwfHx8MA%3D%3D">
-        <div class="card-text"><h2>Lake View</h2></div>
-      </div>
-          <div class="gallery-card" onclick="openGallery(5)">
-        <img src="https://media.istockphoto.com/id/2162618334/photo/parking-lot-is-full-of-cars.webp?a=1&b=1&s=612x612&w=0&k=20&c=TILx0VHO0GYa3yTjNCsJDZdCZE-HQBwzHFbBAiTJVTs=">
-        <div class="card-text"><h2>Parking</h2></div>
-      </div>
-    </div>
-    </div>
-
-    <!-- Full Gallery Viewer -->
-    <section class="gallery-viewer" id="viewer">
-      <button id="backBtn" onclick="goBack()">← Back</button>
-      <h2 id="viewTitle"></h2>
-      <div class="gallery-grid" id="galleryImages"></div>
     </section>
 
-  </section>
- </div>
- <style>
-/* ======= Alakan Footer Styles ======= */
-.alak-footer {
-  background: linear-gradient(to right, #800000, #5a0000, #450000); /* Maroon gradient */
-  color: #FFD700 ; /* Gold text */
-  padding: 60px 20px 30px;
-  font-family: 'Segoe UI', sans-serif;
-  width: 100vw;
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <!-- Flower decorations - Added from your original code -->
+      <img src="flowe.png" alt="Flower decoration" class="flower flower-top-left">
+      <img src="flowe.png" alt="Flower decoration" class="flower flower-bottom-right">
 
-position: relative;
-top:600px;
-  overflow:hidden;
-  
+      <div class="section-header slide-up">
+        <h2>Explore Our Spaces</h2>
+        <p>From elegant rooms to stunning common areas, every corner of Alakan Residency is designed to provide comfort and luxury. Browse our gallery to experience the ambiance before your visit.</p>
+      </div>
+
+      <!-- Gallery Categories -->
+      <div class="gallery-categories slide-up delay-1">
+        <button class="category-btn active" data-category="all">All</button>
+        <button class="category-btn" data-category="rooms">Rooms</button>
+        <button class="category-btn" data-category="facilities">Facilities</button>
+        <button class="category-btn" data-category="dining">Dining</button>
+        <button class="category-btn" data-category="views">Views</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid">
+        <div class="gallery-item" data-category="rooms">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Deluxe Room">
+          <div class="gallery-item-overlay">
+            <h3>Deluxe Room</h3>
+            <p>Spacious accommodation with premium amenities</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="facilities">
+          <img src="https://images.unsplash.com/photo-1582484983984-1a930896da01?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Lobby Area">
+          <div class="gallery-item-overlay">
+            <h3>Elegant Lobby</h3>
+            <p>Our welcoming entrance with luxurious seating</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="dining">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Restaurant">
+          <div class="gallery-item-overlay">
+            <h3>Fine Dining</h3>
+            <p>Gourmet meals in an elegant setting</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="views">
+          <img src="https://images.unsplash.com/photo-1658591350663-502cc60ef897?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Lake View">
+          <div class="gallery-item-overlay">
+            <h3>Lake View</h3>
+            <p>Stunning views from our premium rooms</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="facilities">
+          <img src="https://images.unsplash.com/photo-1604063165585-e17e9c3c3f0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Parking">
+          <div class="gallery-item-overlay">
+            <h3>Secure Parking</h3>
+            <p>24/7 monitored parking facility</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="rooms">
+          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Suite">
+          <div class="gallery-item-overlay">
+            <h3>Executive Suite</h3>
+            <p>Luxury living with separate living area</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-more slide-up delay-2">
+        <button class="view-more-btn">View More Photos</button>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+      <div class="testimonials-container">
+        <div class="testimonials-header slide-up">
+          <h2>What Our Guests Say</h2>
+          <p>Don't just take our word for it. Here's what some of our valued guests have to say about their experience at Alakan Residency.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card slide-up delay-1">
+            <div class="testimonial-text">
+              The rooms were immaculate and the service was exceptional. The view from our room was breathtaking, especially at sunrise. We'll definitely be back!
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson" class="author-avatar">
+              <div class="author-info">
+                <h4>Sarah Johnson</h4>
+                <p>Business Traveler</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card slide-up delay-2">
+            <div class="testimonial-text">
+              Perfect location for visiting the temple. The staff went above and beyond to make our stay comfortable. The dining options were excellent with authentic local cuisine.
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rajesh Kumar" class="author-avatar">
+              <div class="author-info">
+                <h4>Rajesh Kumar</h4>
+                <p>Family Vacation</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card slide-up delay-3">
+            <div class="testimonial-text">
+              As a frequent traveler, I can confidently say this is one of the best hotels in the area. The attention to detail and personalized service sets it apart from others.
+            </div>
+            <div class="testimonial-author">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel" class="author-avatar">
+              <div class="author-info">
+                <h4>Priya Patel</h4>
+                <p>Corporate Executive</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Deluxe Room</h2>
+        <button class="close-modal" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-content">
+        <img src="" alt="" class="modal-main-image" id="modalMainImage">
+        <div class="modal-thumbnails" id="modalThumbnails">
+          <!-- Thumbnails will be added here dynamically -->
+        </div>
+      </div>
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="modal-nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-about">
+          <div class="footer-logo">
+            <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+          </div>
+          <p>Welcome to Alakan Residency, your premier accommodation near Arulmigu Subramanya Swamy Temple in Tiruchendur. We offer comfortable stays with modern amenities at affordable prices.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../rooms.html/rooms.html">Rooms & Suites</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="../services/services.html">Services</a></li>
+            <li><a href="../contact us/contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h3>Contact Info</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 335/1 Taluk Office Road, Tiruchendur, Tamil Nadu 628215</p>
+          <p><i class="fas fa-phone"></i> +91 95142 52526</p>
+          <p><i class="fas fa-envelope"></i> bookme@alakanresidency.com</p>
+          <p><i class="fas fa-clock"></i> 24/7 Reception</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023 Alakan Residency. All Rights Reserved. Designed by Softek Square Pvt Ltd</p>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+
+  <script>
+   
+   
+    // Underline move
+const navItems = document.querySelectorAll(".nav-item");
+const underline = document.getElementById("underline");
+const activeNavItem = document.querySelector(".nav-item.active");
+
+if (activeNavItem) {
+  moveUnderline(activeNavItem);
 }
 
-.alak-container {
-  max-width: 1200px;
-  margin: 0 auto;
+function moveUnderline(target) {
+  const rect = target.getBoundingClientRect();
+  const navRect = target.parentElement.getBoundingClientRect();
+  const left = rect.left - navRect.left;
+  underline.style.left = `${left}px`;
+  underline.style.width = `${rect.width}px`;
 }
 
-.alak-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: space-between;
-}
+navItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    document.querySelector(".nav-item.active")?.classList.remove("active");
+    item.classList.add("active");
+    moveUnderline(item);
+  });
+});
 
-.alak-grid > div {
-  flex: 1 1 220px;
-  min-width: 200px;
-}
+// Mobile hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const navList = document.getElementById("nav-list");
 
-.alak-logo {
-  width: 160px;
-  margin-bottom: 20px;
-}
+hamburger.addEventListener("click", function (e) {
+  e.stopPropagation();
+  navList.classList.toggle("show");
+  hamburger.classList.toggle("active");
+});
 
-.alak-text {
-  font-size: 14px;
-  line-height: 1.6;
-}
+// Dropdown toggle - modified for mobile
+const dropdown = document.getElementById("dropdown");
+const dropdownToggle = document.getElementById("dropdownToggle");
+const dropdownMenu = document.getElementById("dropdownMenu");
 
-.alak-fade-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp2 1s forwards;
-}
+dropdownToggle.addEventListener("click", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  dropdown.classList.toggle("open");
 
-.delay-1 { animation-delay: 0.3s; }
-.delay-2 { animation-delay: 0.6s; }
-.delay-3 { animation-delay: 0.9s; }
-.delay-4 { animation-delay: 1.2s; }
+  // Close other dropdowns if any
+  document.querySelectorAll(".dropdown").forEach((item) => {
+    if (item !== dropdown) {
+      item.classList.remove("open");
+    }
+  });
+});
 
-@keyframes fadeInUp2 {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+// Close dropdown when clicking outside
+document.addEventListener("click", function (e) {
+  if (!dropdown.contains(e.target)) {
+    dropdown.classList.remove("open");
   }
+
+  // Close mobile menu when clicking outside
+  if (
+    window.innerWidth <= 768 &&
+    !navList.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    navList.classList.remove("show");
+    hamburger.classList.remove("active");
+  }
+});
+
+// Close mobile menu when clicking a link
+const navLinks = document.querySelectorAll(".nav-item a:not(#dropdownToggle)");
+navLinks.forEach((link) => {
+  link.addEventListener("click", function () {
+    if (window.innerWidth <= 768) {
+      navList.classList.remove("show");
+      hamburger.classList.remove("active");
+    }
+  });
+});
+
+    // Gallery Modal Functionality
+    const galleryItems = document.querySelectorAll(".gallery-item");
+    const galleryModal = document.getElementById("galleryModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMainImage = document.getElementById("modalMainImage");
+    const modalThumbnails = document.getElementById("modalThumbnails");
+    const closeModal = document.getElementById("closeModal");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentImageIndex = 0;
+    const galleryImages = [];
+
+    // Prepare gallery images data
+    galleryItems.forEach((item, index) => {
+      const img = item.querySelector("img");
+      const title = item.querySelector("h3").textContent;
+      const desc = item.querySelector("p").textContent;
+      
+      galleryImages.push({
+        src: img.src,
+        title: title,
+        desc: desc
+      });
+
+      item.addEventListener("click", () => {
+        openModal(index);
+      });
+    });
+
+    function openModal(index) {
+      currentImageIndex = index;
+      updateModal();
+      galleryModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModalFunc() {
+      galleryModal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    function updateModal() {
+      const currentImage = galleryImages[currentImageIndex];
+      modalTitle.textContent = currentImage.title;
+      modalMainImage.src = currentImage.src;
+      modalMainImage.alt = currentImage.title;
+
+      // Update thumbnails
+      modalThumbnails.innerHTML = "";
+      galleryImages.forEach((img, index) => {
+        const thumbnail = document.createElement("img");
+        thumbnail.src = img.src;
+        thumbnail.alt = img.title;
+        thumbnail.classList.add("modal-thumbnail");
+        if (index === currentImageIndex) {
+          thumbnail.classList.add("active");
+        }
+        thumbnail.addEventListener("click", () => {
+          currentImageIndex = index;
+          updateModal();
+        });
+        modalThumbnails.appendChild(thumbnail);
+      });
+    }
+
+    function navigate(direction) {
+      if (direction === "prev") {
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      } else {
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      }
+      updateModal();
+    }
+
+    // Event listeners
+    closeModal.addEventListener("click", closeModalFunc);
+    prevBtn.addEventListener("click", () => navigate("prev"));
+    nextBtn.addEventListener("click", () => navigate("next"));
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (galleryModal.classList.contains("active")) {
+        if (e.key === "Escape") {
+          closeModalFunc();
+        } else if (e.key === "ArrowLeft") {
+          navigate("prev");
+        } else if (e.key === "ArrowRight") {
+          navigate("next");
+        }
+      }
+    });
+
+    // Back to top button
+    const backToTopBtn = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add("active");
+      } else {
+        backToTopBtn.classList.remove("active");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // Gallery category filtering
+    const categoryBtns = document.querySelectorAll(".category-btn");
+    
+    categoryBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Remove active class from all buttons
+        categoryBtns.forEach(b => b.classList.remove("active"));
+        // Add active class to clicked button
+        btn.classList.add("active");
+        
+        const category = btn.dataset.category;
+        filterGallery(category);
+      });
+    });
+
+    function filterGallery(category) {
+      const items = document.querySelectorAll(".gallery-item");
+      
+      items.forEach(item => {
+        if (category === "all" || item.dataset.category === category) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    }
+
+    // View more button functionality
+    const viewMoreBtn = document.querySelector(".view-more-btn");
+    viewMoreBtn.addEventListener("click", () => {
+      alert("Loading more gallery items...");
+     
+    });
+
+  
+
+    // Start the drawing animation when page loads
+    window.onload = animateDrawing;
+    // Add this to your existing JavaScript (preferably at the end)
+function initScrollAnimations() {
+  // Show grid only after JS loads
+  const grid = document.querySelector('.gallery-grid');
+  if (grid) grid.classList.add('animated');
+
+  // Set up intersection observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  });
+
+  // Observe all gallery items
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    observer.observe(item);
+  });
 }
 
-.alak-footer h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  color: #FFD700; /* Gold headings */
-}
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initScrollAnimations();
+  
+ 
 
-.alak-footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-.alak-footer li {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.alak-footer a {
-  text-decoration: none;
-  color: #FFD700; /* Gold links */
-  transition: color 0.3s;
-}
-
-.alak-footer a:hover {
-  color: #fff;
-}
-
-.alak-social a {
-  font-size: 24px;
-  margin-top: 10px;
-  display: inline-block;
-  color: #FFD700; /* Gold social icons */
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.alak-social a:hover {
-  transform: scale(1.1);
-  color: #fff;
-}
-
-.alak-icon-wrap img {
-  width: 40px;
-  height: 40px;
-  margin-top: 30px;
-}
-
-.alak-subfooter {
-  border-top: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
-  margin-top: 50px;
-  padding-top: 20px;
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  text-align: center;
-}
-
-/* Animation: Floating icon */
-.alak-animate-float {
-  animation: floatY 3s ease-in-out infinite;
-}
-@keyframes floatY {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* ======= Language Section Style ======= */
-.alak-fade-up select {
-  width: 100%;
-  padding: 10px 15px;
-  background: rgba(255, 215, 0, 0.1); /* Light gold background */
-  border: 2px solid #FFD700; /* Gold border */
-  border-radius: 8px;
-  font-size: 14px;
-  color: #FFD700; /* Gold text */
-  font-weight: bold;
-  transition: border 0.3s, box-shadow 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill%3D'%23FFD700'%20height%3D'20'%20viewBox%3D'0%200%2024%2024'%20width%3D'20'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px 16px;
-}
-
-.alak-fade-up select:focus {
-  outline: none;
-  border-color: #FFD700;
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
-}
-
-.alak-fade-up h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #FFD700;
-}
-
-/* Floating Icon Style */
-.alak-icon-wrap {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.alak-icon-wrap img {
-  width: 40px;
-  height: 40px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-  transition: transform 0.4s ease;
-}
-
-.alak-icon-wrap img:hover {
-  transform: scale(1.1) rotate(5deg);
-}
-</style>
-
-<!-- Alakan Residency Footer -->
-<footer class="alak-footer min-w-full relative right-4 top-16" style="margin: 0px ; width: 100vw;margin-bottom: -200px;">
-  <div class="alak-container">
-    <div class="alak-grid">
-      <!-- Logo and Description -->
-      <div class="alak-fade-up">
-        <img src="A-logo.png" alt="Alakan Residency" class="alak-logo" />
-        <p class="alak-text">Welcome to Alakan Residency. A budget-friendly hotel near Arulmigu Subramanya Swamy Temple, Tiruchendur, offering clean, hygienic rooms. Guest satisfaction is our #1 goal.</p>
-      </div>
-
-      <!-- Useful Links -->
-      <div class="alak-fade-up delay-1"style="color: white !important; ">
-        <h3>Useful Links</h3>
-        <ul>
-          <li><a href="index.html">Gallery</a></li>
-          <li><a href="../contact-us/index.html">Contact Us</a></li>
-          <li><a href="../about-us/index.html">About Us</a></li>
-          <li><a href="../account/index.html">My Bookings</a></li>
-          <li><a href="../cancellation-policy/index.html">Cancellation Policy</a></li>
-          <li><a href="../accommodation-policy/index.html">Terms & Conditions</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact Info -->
-      <div class="alak-fade-up delay-2">
-        <h3>Contact Us</h3>
-        <ul>
-          <li><i class="las la-map-marker-alt"></i> 335/1 Taluk Office road, Tiruchendur, TN 628215</li>
-          <li><i class="las la-phone"></i> ‪+91 95142 52526‬</li>
-          <li><i class="las la-envelope"></i> bookme@alakanresidency.com</li>
-        </ul>
-        <div class="alak-social">
-          <a href="https://www.facebook.com/alakanresidency" target="_blank"><i class="fab fa-facebook"></i></a>
-        </div>
-      </div>
-
-      <!-- Language + Float Icon -->
-      <div class="alak-fade-up delay-3" b>
-        <h3>Languages</h3>
-        <select>
-          <option>English</option>
-          <option>Tamil</option>
-        </select>
-        <div class="alak-icon-wrap alak-animate-float">
-          <img src="https://cdn-icons-png.flaticon.com/512/3176/3176364.png" alt="icon">
-        </div>
-      </div>
-    </div>
-
-    <!-- Subfooter -->
-    <div class="alak-subfooter alak-fade-up delay-4">
-      <div>© 2023 - 2024 Alakan Residency. Designed by Softek Square Pvt Ltd</div>
-      <div>All rights reserved.</div>
-    </div>
-  </div>
-</footer>
-  <script src="script.js"></script>
+  
+});
+  </script>
 </body>
 </html>

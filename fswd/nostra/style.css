@@ -1,0 +1,13 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.add{
+    display:flex;
+    justify-content: center;
+    gap: 10%;
+    background: #0a0518;
+    color: white;
+    align-items: center;
+    padding: 1%;
+}

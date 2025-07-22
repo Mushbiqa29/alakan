@@ -20,44 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <style>
-  :root {
-    --alakaz-maroon: #A52626;
-    --alakaz-maroon-hover: #C03030;
-    --alakaz-gradient: linear-gradient(135deg, #A52626, #C03030);
-  }
-body::-webkit-scrollbar{
-  display:none;
-}
-  /* Global text color */
-  body, p, span, li, a, h1, h2, h3, h4, h5, h6 {
-    color: var(--alakaz-maroon) !important;
-  }
-
-  /* Buttons and call-to-actions */
-  button, .book-btn, .btn, input[type="submit"] {
-    background-color: var(--alakaz-maroon) !important;
-    color: #fff !important;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-weight: 600;
-    transition: 0.3s ease;
-    box-shadow: 0 3px 10px rgba(165, 38, 38, 0.2);
-  }
-
-  button:hover, .book-btn:hover, .btn:hover {
-    background-color: var(--alakaz-maroon-hover) !important;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(192, 48, 48, 0.4);
-  }
-
-  /* Optional gradient background use */
-  .alakaz-maroon-bg {
-    background: var(--alakaz-gradient);
-    color: #fff;
-}
-</style>
+  
 
   <!-- Loader -->
   <div id="loader">
@@ -67,33 +30,38 @@ body::-webkit-scrollbar{
 
   <!-- Main Content -->
   <div id="content" style="display: none;">
-    <nav class="navbar">
-      <div class="logo">
-        <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
-      </div>
-      <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-      </div>
-      <ul class="nav-list" id="nav-list">
-        <div class="underline" id="underline"></div>
-        <li class="nav-item active "><a href="#"><h1></h1>Home</a></li>
-        <li class="nav-item"><a href="./rooms.html/rooms.html">Rooms</a></li>
-        <li class="nav-item"><a href="./gallery/gallery.html">Gallery</a></li>
-        <li class="nav-item"><a href="./contact us/contact.html">Contact Us</a></li>
-        <li class="nav-item dropdown" id="dropdown">
-          <a href="#" id="dropdownToggle">
-            Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
-          </a>
- <ul class="dropdown-menu" id="dropdownMenu">
-            <li><a href="./services/services.html"style="color:white!important;">Services</a></li>
-            <li><a href="./policy/policy.html"style="color:white!important;">Policy</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+     <nav class="navbar">
+    <div class="logo">
+      <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-list" id="nav-list">
+      <div class="underline" id="underline"></div>
+      <li class="nav-item active"><a href="#">Home</a></li>
+      <li class="nav-item "><a href="./rooms.html/rooms.html">Rooms</a></li>
+      <li class="nav-item"><a href="./gallery/gallery.html">Gallery</a></li>
+      <li class="nav-item"><a href="./contact us/contact.html">Contact Us</a></li>
+      <li class="nav-item dropdown" id="dropdown">
+        <a href="#" id="dropdownToggle">
+          Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
+        </a>
+        <ul class="dropdown-menu" id="dropdownMenu">
+          <li><a href="./services/services.html">Services</a></li>
+          <li><a href="./policy/policy.html">Policy</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 <div id="home" style="position: relative;">
     <style>
     /* Global button animation */
+
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
     .book-btn {
       display: inline-block;
       padding: 12px 30px;
@@ -127,7 +95,7 @@ body::-webkit-scrollbar{
     }
 
     .book-btn:hover {
-      background: #bb1e1e;
+      background: #861111;
       transform: scale(1.05);
     }
 
@@ -144,7 +112,7 @@ body::-webkit-scrollbar{
 
     /* Slide 1 - Typing */
     .typing-effect {
-      background: linear-gradient(135deg, #f9ec76, #ff0000);
+      background: linear-gradient(135deg, #f9ec76, #700b0b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -153,7 +121,7 @@ body::-webkit-scrollbar{
       font-weight: bold;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 3px solid #f97676;
+      border-right: 3px solid #700b0b;
       animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
       width: 155%;
     }
@@ -169,7 +137,7 @@ body::-webkit-scrollbar{
 
     /* Slide 2 - Fade Zoom */
     .fade-zoom {
-        background: linear-gradient(135deg, #f9ec76, #ff0000);
+        background: linear-gradient(135deg, #f9ec76, #700b0b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -195,7 +163,7 @@ body::-webkit-scrollbar{
 
     /* Slide 3 - Slide-up */
     .slide-up {
-        background: linear-gradient(135deg, #f9ec76, #ff0000);
+        background: linear-gradient(135deg, #f9ec76,#700b0b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -297,14 +265,14 @@ body::-webkit-scrollbar{
           <p class="text-lg md:text-2xl jump-word mb-6">
             ${slide.text.split('').map(char =>` <span>${char === ' ' ? '&nbsp;' : char}</span>`).join('')}
           </p>
-          <a href="../booking.html/booking.html" class="book-btn">Book Now</a>
+          <a href="../booking.html/booking.html" class="book-btn" style="background-color:#700b0b!important">Book Now</a>
         </div>
       `;
 
       // Highlight active dot
       const dots = dotsContainer.querySelectorAll(".dot");
       dots.forEach((dot, i) => {
-        dot.classList.toggle("bg-yellow-400", i === index);
+        dot.classList.toggle("bg-red-800", i === index);
         dot.classList.toggle("bg-gray-400", i !== index);
       });
     }
@@ -340,7 +308,7 @@ body::-webkit-scrollbar{
 
      <!-- ABOUT US SECTION -->
 <section class="py-16 px-4 text-center bg-white text-gray-800 " style="box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
-  <h1 class="text-4xl font-extrabold text-red-200 mb-4 fade-up">About Us</h1>
+  <h1 class="text-4xl font-extrabold text-red-800 mb-4 fade-up">About Us</h1>
   <p class="text-gray-700 max-w-xl mx-auto fade-up delay-200">
     Alakarz Residency is your perfect blend of comfort and elegance, located in the heart of Tiruchendur. Whether for pilgrimage or leisure, we promise a serene and memorable stay.
   </p>
@@ -352,7 +320,7 @@ body::-webkit-scrollbar{
     <div class=" animated-border fade-up delay-300 ">
       <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition">
 <svg style="width: 60px;display:inline-block " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
- <h2 class="text-xl font-bold text-red-300 mb-2">Comfortable Stay</h2>
+ <h2 class="text-xl font-bold text-red-800 mb-2">Comfortable Stay</h2>
         <p class="text-gray-700">Experience clean, well-maintained AC & non-AC rooms designed for your peace and relaxation.</p>
       </div>
     </div>
@@ -362,7 +330,7 @@ body::-webkit-scrollbar{
       <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition">
       <svg style="width: 60px;display:inline-block " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
 
-        <h2 class="text-xl font-bold text-red-300 mb-2">Prime Location</h2>
+        <h2 class="text-xl font-bold text-red-800 mb-2">Prime Location</h2>
         <p class="text-gray-700">Just minutes away from Tiruchendur Murugan Temple and other major landmarks for easy access.</p>
       </div>
     </div>
@@ -372,97 +340,295 @@ body::-webkit-scrollbar{
       <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition ">
 <svg style="width: 60px;display:inline-block " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
 
-        <h2 class="text-xl font-bold text-red-300 mb-2">24/7 Support</h2>
+        <h2 class="text-xl font-bold text-red-800 mb-2">24/7 Support</h2>
         <p class="text-gray-700">24/7 water, free Wi-Fi, ample parking, CCTV security, elevator access, and more for your convenience.</p>
       </div>
     </div>
   </div>
 </section>
-<!-- Best Seller -->
-<section class="py-16 px-4 bg-black text-white">
-  <h1 class="font-bold mt-5 text-4xl text-center text-red-200 mb-10">Best Seller</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+<!-- Best Seller Section -->
+<section class="py-16 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="text-gold-500 font-semibold tracking-widest text-sm uppercase mb-2 block">Premium Accommodations</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block">
+        <span class="relative z-10">Our Best Sellers</span>
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Experience unparalleled comfort in our most popular rooms</p>
+    </div>
     
- <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
-      <img src="https://images.unsplash.com/photo-1657639754502-3c138cb24b4c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8NCUyMGJlZCUyMHJvb218ZW58MHx8MHx8fDA%3D" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Delux Double Room <br>$250</h2>
-      </div>
-    </div>
-
-    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
-      <img src="https://images.unsplash.com/photo-1708517196691-b1d75c483e4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Executive Suite <br>$600</h2>
-      </div>
-    </div>
-
-    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
-      <img src="https://images.unsplash.com/photo-1595161695996-f746349f4945?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Temple View Room <br>$300</h2>
-      </div>
-    </div>
-        <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
-      <img src="https://images.unsplash.com/photo-1648634158203-199accfd7afc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Family Room<br>$356</h2>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Deluxe Double Room -->
+      <div class="room-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl group">
+        <div class="relative overflow-hidden h-60">
+          <img src="https://images.unsplash.com/photo-1657639754502-3c138cb24b4c?w=800&auto=format&fit=crop&q=80" 
+               alt="Deluxe Double Room" 
+               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute top-4 right-4">
+            <span class="bg-maroon-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">BESTSELLER</span>
+          </div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <div class="flex justify-between items-end">
+              <div>
+                <h3 class="text-xl font-bold text-white">Deluxe Double</h3>
+                <p class="text-gold-300 text-sm">From <span class="text-white font-bold">$250</span>/night</p>
+              </div>
+              <a  class="bg-gold-500 hover:bg-gold-600 text-white p-2 rounded-full transition-all transform hover:scale-110"href="./rooms.html/rooms.html">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
-    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
-      <img src="https://images.unsplash.com/photo-1718851972754-6638b49b4775?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fDQlMjBiZWQlMjByb29tfGVufDB8fDB8fHww" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Standard Ac Room <br>$130</h2>
+        <div class="p-5">
+          <div class="flex items-center mb-3">
+            <div class="flex mr-2">
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            </div>
+            <span class="text-gray-500 text-sm">(128 reviews)</span>
+          </div>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              King size bed
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Free WiFi
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Luxury bathroom
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Executive Suite -->
+      <div class="room-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl group">
+        <div class="relative overflow-hidden h-60">
+          <img src="https://images.unsplash.com/photo-1708517196691-b1d75c483e4b?w=800&auto=format&fit=crop&q=80" 
+               alt="Executive Suite" 
+               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <div class="flex justify-between items-end">
+              <div>
+                <h3 class="text-xl font-bold text-white">Executive Suite</h3>
+                <p class="text-gold-300 text-sm">From <span class="text-white font-bold">$600</span>/night</p>
+              </div>
+              <a  href="./rooms.html/rooms.html" class="bg-gold-500 hover:bg-gold-600 text-white p-2 rounded-full transition-all transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center mb-3">
+            <div class="flex mr-2">
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            </div>
+            <span class="text-gray-500 text-sm">(94 reviews)</span>
+          </div>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Separate living area
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Premium amenities
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Panoramic city views
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Temple View Room -->
+      <div class="room-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl group">
+        <div class="relative overflow-hidden h-60">
+          <img src="https://images.unsplash.com/photo-1595161695996-f746349f4945?w=800&auto=format&fit=crop&q=80" 
+               alt="Temple View Room" 
+               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute top-4 right-4">
+            <span class="bg-maroon-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">TRENDING</span>
+          </div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <div class="flex justify-between items-end">
+              <div>
+                <h3 class="text-xl font-bold text-white">Temple View</h3>
+                <p class="text-gold-300 text-sm">From <span class="text-white font-bold">$300</span>/night</p>
+              </div>
+              <a href="./rooms.html/rooms.html" class="bg-gold-500 hover:bg-gold-600 text-white p-2 rounded-full transition-all transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center mb-3">
+            <div class="flex mr-2">
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            </div>
+            <span class="text-gray-500 text-sm">(87 reviews)</span>
+          </div>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Temple-facing balcony
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Meditation space
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Traditional decor
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Family Room -->
+      <div class="room-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl group">
+        <div class="relative overflow-hidden h-60">
+          <img src="https://images.unsplash.com/photo-1648634158203-199accfd7afc?w=800&auto=format&fit=crop&q=80" 
+               alt="Family Room" 
+               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <div class="flex justify-between items-end">
+              <div>
+                <h3 class="text-xl font-bold text-white">Family Room</h3>
+                <p class="text-gold-300 text-sm">From <span class="text-white font-bold">$356</span>/night</p>
+              </div>
+              <a href="./rooms.html/rooms.html" class="bg-gold-500 hover:bg-gold-600 text-white p-2 rounded-full transition-all transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center mb-3">
+            <div class="flex mr-2">
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <svg class="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            </div>
+            <span class="text-gray-500 text-sm">(112 reviews)</span>
+          </div>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Two queen beds
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Extra space for kids
+            </li>
+            <li class="flex items-center">
+              <svg class="w-4 h-4 text-gold-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Connecting rooms available
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left" data-aos-duration="1000">
-      <img src="https://media.istockphoto.com/id/954121470/photo/cozy-studio-apartment-design-with-bedroom-and-living-space.webp?a=1&b=1&s=612x612&w=0&k=20&c=TAbQz9v3luXCE6G1qnksN7VZED2t69XyE4_8AHk8Mfg=" alt="BPlant 4" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Premium Non-Ac Room <br>$620</h2>
-      </div>
+    
+    <div class="text-center mt-12">
+      <a href="./rooms.html/rooms.html" class="inline-block bg-white border-2 border-maroon-700 hover:bg-maroon-700 text-maroon-700 hover:text-red-800 px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+        View More Rooms
+      </a>
     </div>
-
-    <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-500 glow-hover" data-aos="flip-left" data-aos-duration="1000">
-      <img src="https://media.istockphoto.com/id/954121470/photo/cozy-studio-apartment-design-with-bedroom-and-living-space.webp?a=1&b=1&s=612x612&w=0&k=20&c=TAbQz9v3luXCE6G1qnksN7VZED2t69XyE4_8AHk8Mfg=" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold text-red-200 bg-black bg-opacity-50 py-2">Lake View Room <br>$320</h2>
-      </div>
-    </div>
-        <div class="group relative bg-gray-900 rounded-xl overflow-hidden p-4 border-2 border-red-200 glow-hover" data-aos="flip-left !important" data-aos-duration="1000">
-      <img src="https://images.unsplash.com/photo-1745221847962-0397cc719b8e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGRlbHV4JTIwZG91YmxlJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D" alt="Mullu Chedi" class="w-full h-48 object-contain mb-2 transition-transform duration-500 ease-in-out group-hover:scale-105" />
-      <div class="absolute bottom-2 left-0 right-0 text-center">
-        <h2 class="card-title text-lg font-bold bg-black bg-opacity-50 py-2">Garden Side Room <br>$240</h2>
-      </div>
-    </div>
-<style>
-  .group{
-    border:#bb1e1e solid 1px !important;
-  }
-  .glow-hover:hover {
-    box-shadow: 0 0 20px 4px  #d1b724;
-    transform: scale(1.05) rotate(1deg);
-  }
-
-  .card-title {
-    transform: translateY(100%);
-    transition: transform 0.5s ease-in-out;
-    opacity: 0;
-  }
-
-  .group:hover .card-title {
-    transform: translateY(0%);
-    opacity:1;
-}
-</style>
-<script>
-  AOS.init();
-</script>
   </div>
 </section>
+
+<style>
+  :root {
+    --maroon-700: #700b0b;
+    --gold-300: #f0d27d;
+    --gold-400: #d4af37;
+    --gold-500: #c9a227;
+    --gold-600: #be9617;
+  }
+  
+  .bg-maroon-700 { background-color: var(--maroon-700); }
+  .border-maroon-700 { border-color: var(--maroon-700); }
+  .text-maroon-700 { color: var(--maroon-700); }
+  .hover:bg-maroon-700:hover { background-color: var(--maroon-700); }
+  
+  .text-gold-300 { color: var(--gold-300); }
+  .text-gold-400 { color: var(--gold-400); }
+  .text-gold-500 { color: var(--gold-500); }
+  .bg-gold-500 { background-color: var(--gold-500); }
+  .hover:bg-gold-600:hover { background-color: var(--gold-600); }
+  
+  .room-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .room-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .room-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--maroon-700), var(--gold-500));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .room-card:hover::after {
+    opacity: 1;
+  }
+  
+  @media (max-width: 640px) {
+    .room-card {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.querySelector('a[href="/rooms"]').addEventListener('click', function(e) {
+  });
+</script>
 <!-- Carousel Section -->
 <section class="bg-[#0f291e] py-16 px-4 text-white">
-  <h2 class="text-3xl font-bold text-center text-red-200 mb-10">Customer Reviews</h2>
+  <h2 class="text-3xl font-bold text-center text-red-800 mb-10">Customer Reviews</h2>
 
   <!-- Swiper Container -->
   <div class="swiper mySwiper max-w-6xl mx-auto">
@@ -471,8 +637,8 @@ body::-webkit-scrollbar{
       <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
         <p class="mb-4">I had a very peaceful stay at Alakarz Residency. The rooms were neat and well-maintained, and the ambience was really calming. The staff was polite and always available. I would definitely recommend it for families visiting Tiruchendur!</p>
         <div class="flex justify-between items-center">
-          <span class="text-red-400 font-bold">- Aisha Noor</span>
-          <div class="flex gap-1 text-yellow-400 text-lg">
+          <span class="text-red-800 font-bold">- Aisha Noor</span>
+          <div class="flex gap-1 text-red-800 text-lg">
             ⭐⭐⭐⭐☆
           </div>
         </div>
@@ -482,8 +648,8 @@ body::-webkit-scrollbar{
       <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
         <p class="mb-4">The best part about Alakarz is its location—just a few minutes away from the temple. Our room was spacious and air-conditioned, and the beds were super comfortable. We also enjoyed the prompt room service and friendly hospitality. Worth every rupee!</p>
         <div class="flex justify-between items-center">
-          <span class="text-red-400 font-bold">- Rahman Yusuf</span>
-          <div class="flex gap-1 text-yellow-400 text-lg">
+          <span class="text-red-800 font-bold">- Rahman Yusuf</span>
+          <div class="flex gap-1 text-red-800 text-lg">
             ⭐⭐⭐⭐⭐
           </div>
         </div>
@@ -493,8 +659,8 @@ body::-webkit-scrollbar{
       <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
         <p class="mb-4">Excellent experience! I stayed for two nights and the reception team was very helpful. The check-in was smooth, and the room had all necessary amenities. Clean bathrooms and cozy interiors made my stay perfect. Will surely return on my next visit!<p>
         <div class="flex justify-between items-center">
-          <span class="text-red-400 font-bold">- Meena Suresh</span>
-          <div class="flex gap-1 text-yellow-400 text-lg">
+          <span class="text-red-800 font-bold">- Meena Suresh</span>
+          <div class="flex gap-1 text-red-800 text-lg">
             ⭐⭐⭐⭐☆
           </div>
         </div>
@@ -504,8 +670,8 @@ body::-webkit-scrollbar{
       <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
         <p class="mb-4">What a beautiful and affordable place! The garden view from our room was lovely. Everything from cleanliness to service was top-notch. They also arranged local travel guidance for us. A calm, homely place that feels secure and well cared for.</p>
         <div class="flex justify-between items-center">
-          <span class="text-yellow-400 font-bold">- Shanaya Iqbal</span>
-          <div class="flex gap-1 text-yellow-400 text-lg">
+          <span class="text-red-800 font-bold">- Shanaya Iqbal</span>
+          <div class="flex gap-1 text-red-800 text-lg">
             ⭐⭐⭐⭐⭐
           </div>
         </div>
@@ -515,8 +681,8 @@ body::-webkit-scrollbar{
        <div class="swiper-slide bg-[#ff0000] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
         <p class="mb-4">Excellent experience! I stayed for two nights and the reception team was very helpful. The check-in was smooth, and the room had all necessary amenities. Clean bathrooms and cozy interiors made my stay perfect. Will surely return on my next visit!<p>
         <div class="flex justify-between items-center">
-          <span class="text-red-400 font-bold">- Vishal Dev</span>
-          <div class="flex gap-1 text-yellow-400 text-lg">
+          <span class="text-red-800 font-bold">- Vishal Dev</span>
+          <div class="flex gap-1 text-red-800 text-lg">
             ⭐⭐⭐⭐☆
           </div>
         </div>
@@ -526,8 +692,8 @@ body::-webkit-scrollbar{
       <div class="swiper-slide bg-[#d3d627] p-6 rounded-xl shadow-lg border border-yellow-300 transform hover:scale-105 duration-300">
         <p class="mb-4">I booked an executive suite and was pleasantly surprised. The design was elegant, and everything was spotless. The location is ideal for pilgrims and tourists. It was quiet at night, and the bed was super relaxing after a long temple visit.<p>
         <div class="flex justify-between items-center">
-          <span class="text-yellow-400 font-bold">- Liyana Zahir</span>
-          <div class="flex gap-1 text-yellow-400 text-lg">
+          <span class="text-red-800 font-bold">- Liyana Zahir</span>
+          <div class="flex gap-1 text-red-800 text-lg">
             ⭐⭐⭐⭐⭐
           </div>
         </div>
@@ -543,11 +709,11 @@ body::-webkit-scrollbar{
   <!-- CTA Card -->
   <div class="cta max-w-3xl mx-auto mt-32 text-center  z-10 relative">
   <img src="sofa.png" alt="Pot Center" class="pot absolute left-1/3 -bottom-16  translate-x-1/2 -z-20 transition-all duration-1000 ease-in-out " style="width: 500px;"/>
-    <h2 class="text-4xl font-extrabold text-yellow-200 mb-4 drop-shadow mt-10 relative z-10">Book Your Stay at Alakarz Residency Today!</h2>
+    <h2 class="text-4xl font-extrabold text-red-800 mb-4 drop-shadow mt-10 relative z-10 max-[780px]:!text-xl">Book Your Stay at Alakarz Residency Today!</h2>
     <p class="text-white text-lg md:text-xl font-medium mb-6  relative z-10 " style="color: white !important;">
      Experience comfort, convenience, and class — all just minutes from Tiruchendur Temple. Reserve your room now and enjoy warm hospitality with unmatched amenities.
     </p>
-    <button class=" animated-btn bg-yellow-200 text-white px-6 py-3 rounded-lg shadow-md font-bold ">
+    <button class=" animated-btn bg-red-800 text-white px-6 py-3 rounded-lg shadow-md font-bold ">
 <span class="relative z-10" style="color: white !important;"><a href="./booking.html/booking.html"style="color:white !important;">Book Now</a></span>
     </button>
   </div>
@@ -632,66 +798,52 @@ background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 10px #970505;
 }
   </style>
-<!-- Alakan Residency Footer -->
-<footer class="alak-footer min-w-full relative right-4 top-16" style="margin: 0px ; width: 100vw ;">
-  <div class="alak-container">
-    <div class="alak-grid">
-      <!-- Logo and Description -->
-      <div class="alak-fade-up">
-        <img src="A-logo.png" alt="Alakan Residency" class="alak-logo" />
-        <p class="alak-text" style="color:#FFD700  !important;">Welcome to Alakan Residency. A budget-friendly hotel near Arulmigu Subramanya Swamy Temple, Tiruchendur, offering clean, hygienic rooms. Guest satisfaction is our #1 goal.</p>
-      </div>
-
-      <!-- Useful Links -->
-      <div class="alak-fade-up delay-1">
-        <h3 style="color:#FFD700  !important;">Useful Links</h3>
-        <ul>
-          <li><a href="index.html"style="color:#FFD700  !important;">Gallery</a></li>
-          <li><a href="../contact-us/index.html"style="color:#FFD700  !important;">Contact Us</a></li>
-          <li><a href="../about-us/index.html"style="color:#FFD700  !important;">About Us</a></li>
-          <li><a href="../account/index.html"style="color:#FFD700  !important; ">My Bookings</a></li>
-          <li><a href="../cancellation-policy/index.html"style="color:#FFD700  !important; ">Cancellation Policy</a></li>
-          <li><a href="../accommodation-policy/index.html"style="color:#FFD700  !important;">Terms & Conditions</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact Info -->
-      <div class="alak-fade-up delay-2">
-        <h3 style="color:#FFD700  !important;">Contact Us</h3>
-        <ul>
-          <li style="color:#FFD700  !important;"><i class="las la-map-marker-alt"></i> 335/1 Taluk Office road, Tiruchendur, TN 628215</li>
-          <li style="color:#FFD700  !important;"><i class="las la-phone"></i> ‪+91 95142 52526‬</li>
-          <li style="color:#FFD700  !important;"><i class="las la-envelope"></i> bookme@alakanresidency.com</li>
-        </ul>
-        <div class="alak-social">
-          <a href="https://www.facebook.com/alakanresidency" target="_blank" style="color:#FFD700  !important;"><i class="fab fa-facebook"></i></a>
-        </div>
-      </div>
-
-      <!-- Language + Float Icon -->
-      <div class="alak-fade-up delay-3" b>
-        <h3 style="color:#FFD700  !important;">Languages</h3>
-        <select style="color:#FFD700  !important;">
-          <option >English</option>
-          <option >Tamil</option>
-        </select>
-        <div class="alak-icon-wrap alak-animate-float">
-          <img src="https://cdn-icons-png.flaticon.com/512/3176/3176364.png" alt="icon">
-        </div>
-      </div>
-    </div>
-
-    <!-- Subfooter -->
-    <div class="alak-subfooter alak-fade-up delay-4">
-      <div>© 2023 - 2024 Alakan Residency. Designed by Softek Square Pvt Ltd</div>
-      <div>All rights reserved.</div>
-    </div>
-  </div>
-</footer>
-<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">
   <i class="fas fa-arrow-up"></i>
 </button>
 </div>
+ <!-- Footer Component -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+        </div>
+        <p>Welcome to Alakan Residency, your premier accommodation near Arulmigu Subramanya Swamy Temple in Tiruchendur.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-tripadvisor"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../rooms.html/rooms.html">Rooms & Suites</a></li>
+          <li><a href="./gallery/gallery.html">Gallery</a></li>
+          <li><a href="../services/services.html">Services</a></li>
+          <li><a href="../contact us/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Info</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 335/1 Taluk Office Road, Tiruchendur, Tamil Nadu 628215</p>
+        <p><i class="fas fa-phone"></i> +91 95142 52526</p>
+        <p><i class="fas fa-envelope"></i> bookme@alakanresidency.com</p>
+        <p><i class="fas fa-clock"></i> 24/7 Reception</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2023 Alakan Residency. All Rights Reserved. Designed by Softek Square Pvt Ltd</p>
+    </div>
+    
+  </footer>
+
    <script src="script.js"></script>
 
 </body>

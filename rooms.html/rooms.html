@@ -3,288 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alakar Residency - Room Selection</title>
+    <title>Alakar Residency - Luxury Rooms & Suites</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --maroon: #A52626;
             --maroon-dark: #7a1c1c;
             --gold: #D4AF37;
-            --gold-light: #e8c874;
+            --gold-light: #F5D98B;
             --black: #1A1A1A;
+            --cream: #F8F4E9;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-    
 
         body {
-         background: linear-gradient(to right, #f9d976, #b88d00);
+            background-color: #000;
             color: white;
             overflow-x: hidden;
         }
 
+        /* Navbar - Keep your original styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            top: -100px;
+            opacity: 0;
+            animation: slideDown 1s ease forwards;
+            transition: all 0.3s ease;
+        }
 
-/* Loader */
-#loader {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(to right, #f9d976, #b88d00);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
+        @keyframes slideDown {
+            0% {
+                top: -100px;
+                opacity: 0;
+            }
+            100% {
+                top: 0;
+                opacity: 1;
+            }
+            }
 
-#houseCanvas {
-  width: 250px;
-  height: 250px;
-}
+            .logo img {
+                height: 50px;
+                transition: transform 0.3s ease;
+            }
 
-.loading-text {
-  font-size: 1.2rem;
-  color: #b80000;
-  font-weight: 600;
-  position: relative;
-  bottom: 60px;
-  left: 5px;
-}
+            .logo:hover img {
+                transform: scale(1.05);
+            }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1rem;
-  position: fixed;
-  width: 100%;
-   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  z-index: 1000;
-  top: -100px;
-  opacity: 0;
-  animation: slideDown 1s ease forwards;
-}
+            .nav-list {
+                display: flex;
+                list-style: none;
+                gap: 2rem;
+                position: relative;
+                align-items: center;
+            }
 
-@keyframes slideDown {
-  0% {
-    top: -100px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
-}
+            .nav-item a {
+                color: white;
+                text-decoration: none;
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+                position: relative;
+                display: inline-block;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
 
-.logo img {
-  height: 50px;
-}
+            .nav-item a:hover {
+                color: #f9d976 !important;
+            }
 
-.nav-list {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-  position: relative;
-  align-items: center;
-}
+            .nav-item.active a {
+                color: #f9d976 !important;
+            }
 
-.nav-item a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  position: relative;
-  display: inline-block;
-  font-weight: bold;
-}
-.nav-item.active{
-transition: all 3s;
-}
-.nav-item.active a {
-  color: rgb(117, 7, 7) !important;
-}
+            .underline {
+                position: absolute;
+                bottom: 0;
+                height: 3px;
+                width: 60px;
+                background: linear-gradient(90deg, #f9d976, #b88d00);
+                transition: all 0.4s ease;
+                border-radius: 2px;
+            }
 
-.underline {
-  position: absolute;
-  bottom: 0;
-  height: 3px;
-  width: 60px;
-  background: linear-gradient(90deg, #d1b724, hwb(0 2% 47%));
-  transition: all 0.4s ease;
-  border-radius: 2px;
-}
+            /* Dropdown */
+            .dropdown-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                border-radius: 10px;
+                margin-top: 10px;
+                right: 0;
+                padding: 0.5rem 0;
+                z-index: 1000;
+                min-width: 200px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            }
 
-/* Dropdown */
-.dropdown-menu {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  background: rgba(148, 12, 12, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  margin-top: 10px;
-  right: 0.1px;
-  padding: 0.5rem 1rem;
-  z-index: 1000;
-}
-.dropdown-menu a{
-    color: white !important;
-}
-.dropdown-menu a:hover{
-    color: #ffffff!important;
-    transition: all 1s ease-in;
-}
-.dropdown.open .dropdown-menu {
-  display: flex;
-}
+            .dropdown-menu li {
+                padding: 0.5rem 1.5rem;
+            }
 
-#dropdownArrow {
-  transition: transform 0.3s ease;
-}
+            .dropdown-menu a {
+                color: white !important;
+                display: block;
+                padding: 0.5rem 0;
+                transition: all 0.3s ease;
+            }
 
-.dropdown.open #dropdownArrow {
-  transform: rotate(180deg);
-}
+            .dropdown-menu a:hover {
+                color: #f9d976 !important;
+                padding-left: 1.2rem;
+            }
 
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
+            .dropdown.open .dropdown-menu {
+                display: flex;
+            }
 
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
+            #dropdownArrow {
+                transition: transform 0.3s ease;
+                font-size: 0.8rem;
+                margin-left: 5px;
+            }
 
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px) !important;
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0 !important;
-}
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px)  !important;
-}
+            .dropdown.open #dropdownArrow {
+                transform: rotate(180deg);
+            }
 
+            /* Hamburger */
+            .hamburger {
+                display: none;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+                padding: 10px;
+                z-index: 1001;
+            }
 
-        .slider {
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
+            .hamburger span {
+                width: 25px;
+                height: 3px;
+                background: white;
+                border-radius: 2px;
+                transition: all 0.3s ease;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+        /* Room Showcase - Completely Redesigned */
+        .room-showcase {
+            padding: 150px 0 100px;
+            background: #000;
             position: relative;
+            overflow: hidden;
         }
 
-        .slider .list .item {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            inset: 0 0 0 0;
-            transition: all 0.5s ease;
-        }
-
-        .slider .list .item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
-        }
-
-        .slider .list .item .content {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 90%;
-            max-width: 1140px;
-            left: 10%;
-            padding-right: 10%;
-            box-sizing: border-box;
-            color: #fff;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 0 20px;
+            position: relative;
             z-index: 10;
         }
 
-        .slider .list .item .content .title {
-            font-size: clamp(2rem, 5vw, 5rem);
+        .section-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .section-header h1:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--maroon);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--cream);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Luxury Slider */
+        .luxury-slider {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 80vh;
+            min-height: 700px;
+            perspective: 3000px;
+        }
+
+        .slider-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .slider-item {
+            position: absolute;
+            width: 80%;
+            height: 90%;
+            left: 10%;
+            top: 5%;
+            opacity: 0;
+            transform: translateZ(-800px) rotateY(30deg);
+            transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .slider-item.active {
+            opacity: 1;
+            transform: translateZ(0) rotateY(0);
+            z-index: 10;
+        }
+
+        .slider-item.prev {
+            opacity: 0.6;
+            transform: translateX(-30%) translateZ(-400px) rotateY(20deg);
+            z-index: 5;
+        }
+
+        .slider-item.next {
+            opacity: 0.6;
+            transform: translateX(30%) translateZ(-400px) rotateY(-20deg);
+            z-index: 5;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .slider-item.active img {
+            transform: scale(1.03);
+        }
+
+        .slider-content {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 8%;
+            width: 45%;
+            padding: 40px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border-left: 4px solid var(--gold);
+            z-index: 20;
+            opacity: 0;
+            transition: all 0.8s ease 0.3s;
+        }
+
+        .slider-item.active .slider-content {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .slider-item.prev .slider-content,
+        .slider-item.next .slider-content {
+            opacity: 0;
+            transform: translateY(-50%) translateX(-50px);
+        }
+
+        .slider-content .title {
+            font-size: 2.8rem;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 15px;
         }
 
-        .slider .list .item .content .type {
-            font-size: clamp(1.2rem, 3vw, 3rem);
+        .slider-content .title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--maroon);
+        }
+
+        .slider-content .type {
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--maroon);
+            margin-bottom: 1.5rem;
+            color: white;
+            background: var(--maroon);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            letter-spacing: 1px;
         }
 
-        .slider .list .item .features {
+        .slider-features {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .slider .list .item .features .feature {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
+        .slider-features .feature {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 30px;
             font-size: 0.9rem;
             backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
         }
 
-        .slider .list .item .price {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
+        .slider-features .feature:hover {
+            background: var(--maroon);
+            transform: translateY(-3px);
+        }
+
+        .slider-features .feature i {
             color: var(--gold);
+            font-size: 1rem;
         }
 
-        .slider .list .item .description {
-            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-            line-height: 1.6;
+        .slider-content .price {
+            font-size: 2.2rem;
+            font-weight: 700;
             margin-bottom: 2rem;
-            max-width: 600px;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slider-content .price span {
+            font-size: 1rem;
+            color: white;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+
+        .slider-content .description {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            color: var(--cream);
+            opacity: 0.9;
         }
 
         .book-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--maroon);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--maroon), var(--maroon-dark));
             color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(165, 38, 38, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1;
         }
 
         .book-btn:hover {
-            background: var(--maroon-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(165, 38, 38, 0.6);
         }
 
-        .book-btn::after {
+        .book-btn:before {
             content: '';
             position: absolute;
             top: 0;
@@ -293,784 +439,1327 @@ transition: all 3s;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: 0.5s;
+            z-index: -1;
         }
 
-        .book-btn:hover::after {
+        .book-btn:hover:before {
             left: 100%;
         }
 
-        .thumbnail {
+        .book-btn i {
+            transition: transform 0.5s ease;
+        }
+
+        .book-btn:hover i {
+            transform: translateX(10px);
+        }
+
+        /* Slider Navigation */
+        .slider-nav {
             position: absolute;
-            bottom: 30px;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            width: max-content;
-            z-index: 100;
             display: flex;
             gap: 15px;
-            padding: 0 15px;
-            max-width: 100%;
-            overflow-x: auto;
-            scrollbar-width: none;
+            z-index: 100;
         }
 
-        .thumbnail::-webkit-scrollbar {
-            display: none;
-        }
-
-        .thumbnail .item {
-            width: 100px;
-            height: 150px;
-            flex-shrink: 0;
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
-        .thumbnail .item.active {
+        .slider-dot.active {
+            background: transparent;
             border-color: var(--gold);
-            transform: scale(1.05);
+            transform: scale(1.3);
         }
 
-        .thumbnail .item:hover {
-            transform: scale(1.05);
+        .slider-dot:hover {
+            background: var(--gold);
         }
 
-        .thumbnail .item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .arrowButtons {
+        /* Slider Arrows */
+        .slider-arrows {
             position: absolute;
             top: 50%;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 30px;
             box-sizing: border-box;
             z-index: 100;
+            transform: translateY(-50%);
+            display: n;
         }
 
-        .arrowButtons button {
-            width: 50px;
-            height: 50px;
+        .slider-arrow {
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background-color: rgba(165, 38, 38, 0.7);
+            background: rgba(165, 38, 38, 0.7);
             border: none;
             color: white;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10;
         }
 
-        .arrowButtons button:hover {
-            background-color: var(--maroon);
+        .slider-arrow:hover {
+            background: var(--maroon);
             transform: scale(1.1);
         }
 
-        /* Animations */
-        .slider .list .item.active .content .title,
-        .slider .list .item.active .content .type,
-        .slider .list .item.active .content .features,
-        .slider .list .item.active .content .price,
-        .slider .list .item.active .content .description,
-        .slider .list .item.active .content .book-btn {
-            animation: fadeInUp 0.5s forwards;
+        .slider-arrow:active {
+            transform: scale(0.95);
         }
 
-        .slider .list .item.active .content .title {
-            animation-delay: 0.3s;
+        /* Room Amenities Section - Enhanced */
+        .amenities-section {
+            padding: 100px 20px;
+            background: linear-gradient(to right, #000, #1A1A1A);
+            position: relative;
+            overflow: hidden;
         }
 
-        .slider .list .item.active .content .type {
-            animation-delay: 0.4s;
+        .amenities-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
-        .slider .list .item.active .content .features {
-            animation-delay: 0.5s;
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
 
-        .slider .list .item.active .content .price {
-            animation-delay: 0.6s;
+        .amenity-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .slider .list .item.active .content .description {
-            animation-delay: 0.7s;
+        .amenity-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(165, 38, 38, 0.1), rgba(212, 175, 55, 0.05));
+            z-index: -1;
         }
 
-        .slider .list .item.active .content .book-btn {
-            animation-delay: 0.8s;
+        .amenity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(212, 175, 55, 0.3);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        .amenity-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+            transition: all 0.5s ease;
+        }
+
+        .amenity-card:hover .amenity-icon {
+            transform: rotateY(180deg);
+        }
+
+        .amenity-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+
+        .amenity-card h3:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--maroon);
+        }
+
+        .amenity-card p {
+            font-size: 1rem;
+            color: var(--cream);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Testimonials Section - Enhanced */
+        .testimonials-section {
+            padding: 100px 20px;
+            background: linear-gradient(to right, #1A1A1A, #000);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow: hidden;
+        }
+
+        .testimonial-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(165, 38, 38, 0.1), rgba(212, 175, 55, 0.05));
+            z-index: -1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 8rem;
+            color: rgba(212, 175, 55, 0.05);
+            font-family: serif;
+            line-height: 1;
+            z-index: -1;
+        }
+
+        .testimonial-content {
+            margin-bottom: 30px;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-card:hover .author-avatar {
+            transform: rotate(15deg);
+        }
+
+        .author-info h4 {
+            color: white;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .author-info p {
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .rating {
+            color: var(--gold);
+            margin-top: 5px;
+            font-size: 1rem;
+        }
+
+        /* Special Offers Section - Enhanced */
+        .offers-section {
+            padding: 100px 20px;
+            background: linear-gradient(to right, #000, #1A1A1A);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offers-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .offer-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .offer-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(165, 38, 38, 0.1), rgba(212, 175, 55, 0.05));
+            z-index: -1;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .offer-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .offer-image:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8));
+            z-index: 1;
+        }
+
+        .offer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .offer-card:hover .offer-image img {
+            transform: scale(1.1);
+        }
+
+        .offer-content {
+            padding: 30px;
+            position: relative;
+        }
+
+        .offer-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+
+        .offer-content h3:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--maroon);
+        }
+
+        .offer-content p {
+            color: var(--cream);
+            margin-bottom: 20px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .offer-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .offer-price del {
+            color: rgba(255,255,255,0.5);
+            margin-right: 15px;
+            font-weight: normal;
+            font-size: 1.3rem;
+        }
+
+        .offer-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--maroon), var(--maroon-dark));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(165, 38, 38, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            z-index: 1;
+        }
+
+        .offer-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(165, 38, 38, 0.6);
+        }
+
+        .offer-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .offer-btn:hover:before {
+            left: 100%;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .luxury-slider {
+                height: 70vh;
+                min-height: 600px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .slider-content {
+                width: 55%;
+            }
+            
+            .slider-content .title {
+                font-size: 2.4rem;
             }
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .slider .list .item .content {
-                left: 5%;
-                padding-right: 5%;
-                width: 95%;
+        @media (max-width: 992px) {
+            .section-header h1 {
+                font-size: 2.8rem;
             }
-
-            .thumbnail {
-                bottom: 20px;
+            
+            .luxury-slider {
+                height: 65vh;
+                min-height: 500px;
             }
-
-            .thumbnail .item {
-                width: 80px;
-                height: 120px;
-            }
-
-            .arrowButtons button {
-                width: 40px;
-                height: 40px;
-            }
-
-            .slider .list .item .features .feature {
-                font-size: 0.8rem;
-                padding: 3px 10px;
-            }
-             #houseCanvas {
-    width: 180px;
-    height: 180px;
-  }
-
-  .loading-text {
-    font-size: 1rem;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .nav-list {
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: rgba(78, 71, 71, 0.95);
-    padding: 1rem;
-    display: none;
-  }
-
-  .nav-list.show {
-    display: flex;
-  }
-
-  .underline {
-    display: none;
-  }
-
-  .dropdown-menu {
-    position: static;
-    margin-top: 0;
-    padding-left:1rem;
-}
- .arrowButtons button {
-  position:relative;
-  top:180px
- }
-        }
-
-        @media (max-width: 480px) {
-            .slider .list .item .content {
-                top: 45%;
-                left: 5%;
+            
+            .slider-item {
                 width: 90%;
-                padding-right: 5%;
+                left: 5%;
+            }
+            
+            .slider-content {
+                width: 60%;
+                padding: 30px;
+            }
+            
+            .amenities-grid,
+            .testimonials-grid,
+            .offers-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h1 {
+                font-size: 2.2rem;
             }
 
-            .thumbnail {
-                bottom: 15px;
-                gap: 10px;
+            .luxury-slider {
+                height: 100vh !important;
+                min-height: 600px;
+                transform: scale(0.8);
             }
-
-            .thumbnail .item {
-                width: 70px;
-                height: 100px;
+            
+            .slider-content {
+                width: 80% !important;
+                height: 80% !important;
+                left: 10%;
+                padding: 25px;
             }
-
-            .book-btn {
+            
+            .slider-content .title {
+                font-size: 1rem !important;
+            }
+            
+            .slider-content .description {
+                font-size: 0.5rem;
+            }
+            
+            .book-btn,
+            .offer-btn {
                 padding: 10px 20px;
-                font-size: 0.9rem;
+                font-size: 10px;
             }
+            
+            .slider-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                display :none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-list {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 1000;
+                padding: 2rem;
+            }
+
+            .nav-list.show {
+                left: 0;
+            }
+
+            .nav-item {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-item a {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                background: transparent;
+                box-shadow: none;
+                margin-top: 0;
+                padding: 0;
+                display: none;
+            }
+
+            .dropdown.open .dropdown-menu {
+                display: flex;
+            }
+
+            .dropdown-menu li {
+                padding: 0.5rem 0;
+            }
+
+            .dropdown-menu a {
+                padding: 0.5rem 0 !important;
+            }
+
+            .underline {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-header p {
+                font-size: 1rem;
+            }
+            
+            .luxury-slider {
+                height: 70vh;
+                min-height: 350px;
+            }
+            
+            .slider-content {
+                width: 90%;
+                left: 5%;
+                padding: 20px;
+            }
+            
+            .slider-content .title {
+                font-size: 1.6rem;
+            }
+            
+            .slider-content .type {
+                font-size: 1rem;
+                padding: 6px 15px;
+            }
+            
+            .slider-features .feature {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .book-btn,
+            .offer-btn {
+                padding: 12px 25px;
+                font-size: 0.8rem;
+            }
+            
+            .amenities-grid,
+            .testimonials-grid,
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-card {
+                padding: 30px;
+            }
+        }
+
+        /* Footer - Keep your original styles */
+        .footer {
+            background: #111;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo img {
+            height: 50px;
+        }
+
+        .footer-about p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: #f9d976;
+            color: #111;
+            transform: translateY(-5px);
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after, .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #f9d976;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: #f9d976;
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .footer-contact p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: #f9d976;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #f9d976;
+            color: #111;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #b88d00;
+            transform: translateY(-5px);
         }
     </style>
 </head>
-<body >
-   <div id="loader">
-    <canvas id="houseCanvas" width="300" height="300"></canvas>
-    <p class="loading-text">Preparing your luxury stay…</p>
-  </div>
- <div id="content" style="display: none;">
-   <!-- Main Content -->
+<body>
+    <!-- Your original navbar -->
     <nav class="navbar">
-      <div class="logo">
-        <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
-      </div>
-      <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-      </div>
-       <ul class="nav-list" id="nav-list">
-        <div class="underline" id="underline"></div>
-        <li class="nav-item"><a href="../index.html">Home</a></li>
-        <li class="nav-item active"><a href="rooms.html">Rooms</a></li>
-        <li class="nav-item "><a href="../gallery/gallery.html">Gallery</a></li>
-        <li class="nav-item"><a href="../contact us/contact.html">Contact Us</a></li>
-        <li class="nav-item dropdown" id="dropdown">
-          <a href="#" id="dropdownToggle">
-            Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
-          </a>
-           <ul class="dropdown-menu" id="dropdownMenu">
-            <li><a href="../services/services.html"style="color:white!important;">Services</a></li>
-            <li><a href="../policy/policy.html"style="color:white!important;">Policy</a></li>
-          </ul>
-        </li>
-      </ul>
+        <div class="logo">
+            <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+        <ul class="nav-list" id="nav-list">
+            <div class="underline" id="underline"></div>
+            <li class="nav-item"><a href="../index.html">Home</a></li>
+            <li class="nav-item active"><a href="rooms.html">Rooms</a></li>
+            <li class="nav-item"><a href="../gallery/gallery.html">Gallery</a></li>
+            <li class="nav-item"><a href="../contact us/contact.html">Contact Us</a></li>
+            <li class="nav-item dropdown" id="dropdown">
+                <a href="#" id="dropdownToggle">
+                    Pages <i class="fas fa-chevron-down" id="dropdownArrow"></i>
+                </a>
+                <ul class="dropdown-menu" id="dropdownMenu" style="list-style: none;">
+                    <li><a href="../services/services.html">Services</a></li>
+                    <li><a href="../policy/policy.html">Policy</a></li>
+                </ul>
+            </li>
+        </ul>
     </nav>
-    <div id="container">
-      <div class="slider">
-        <div class="list">
-            <div class="item active">
-                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Honeymoon Suite">
-                <div class="content">
-                    <h2 class="title">Honeymoon Suite</h2>
-                    <p class="type">Romantic Getaway</p>
-                    <div class="features">
-                        <span class="feature">King Bed</span>
-                        <span class="feature">Private Balcony</span>
-                        <span class="feature">55 sqm</span>
-                        <span class="feature">Champagne</span>
+
+    <!-- Enhanced Room Showcase Section -->
+    <section class="room-showcase">
+        <div class="section-header">
+            <h1>Our Luxurious Rooms & Suites</h1>
+            <p>Experience unparalleled comfort in our meticulously designed accommodations, where every detail is crafted for your relaxation and enjoyment.</p>
+        </div>
+
+        <div class="luxury-slider">
+            <div class="slider-track">
+                <!-- Honeymoon Suite -->
+                <div class="slider-item active">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Honeymoon Suite">
+                    <div class="slider-content">
+                        <h2 class="title">Honeymoon Suite</h2>
+                        <p class="type">Romantic Getaway</p>
+                        <div class="slider-features">
+                            <span class="feature"><i class="fas fa-bed"></i> King Bed</span>
+                            <span class="feature"><i class="fas fa-umbrella-beach"></i> Private Balcony</span>
+                            <span class="feature"><i class="fas fa-ruler-combined"></i> 55 sqm</span>
+                            <span class="feature"><i class="fas fa-glass-cheers"></i> Champagne</span>
+                        </div>
+                        <p class="price">₹4500 <span>/ night (including breakfast)</span></p>
+                        <p class="description">Indulge in romantic luxury with our honeymoon suite featuring a king-size bed, private balcony with stunning views, and complimentary champagne to celebrate your love.</p>
+                        <button class="book-btn" onclick="bookRoom('Honeymoon Suite', 4500)">Book Now <i class="fas fa-arrow-right"></i></button>
                     </div>
-                    <p class="price">₹4500 / night</p>
-                    <p class="description">
-                        Celebrate your love in our specially designed honeymoon suite with romantic decor and premium amenities.
-                    </p>
-                    <button class="book-btn" onclick="bookRoom('Honeymoon Suite', 4500)">Book Now</button>
+                </div>
+
+                <!-- Business Room -->
+                <div class="slider-item next">
+                    <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Business Room">
+                    <div class="slider-content">
+                        <h2 class="title">Executive Business Room</h2>
+                        <p class="type">Productive Stay</p>
+                        <div class="slider-features">
+                            <span class="feature"><i class="fas fa-wifi"></i> High-speed WiFi</span>
+                            <span class="feature"><i class="fas fa-ruler-combined"></i> 35 sqm</span>
+                            <span class="feature"><i class="fas fa-user-tie"></i> Meeting Space</span>
+                            <span class="feature"><i class="fas fa-coffee"></i> Coffee Station</span>
+                        </div>
+                        <p class="price">₹3200 <span>/ night (including breakfast)</span></p>
+                        <p class="description">Designed for the modern professional, our business room features a spacious work area, high-speed internet, and all the amenities you need for a productive stay.</p>
+                        <button class="book-btn" onclick="bookRoom('Business Room', 3200)">Book Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Pool View Room -->
+                <div class="slider-item">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Pool View Room">
+                    <div class="slider-content">
+                        <h2 class="title">Pool View Room</h2>
+                        <p class="type">Refreshing Stay</p>
+                        <div class="slider-features">
+                            <span class="feature"><i class="fas fa-bed"></i> Queen Bed</span>
+                            <span class="feature"><i class="fas fa-swimming-pool"></i> Pool Access</span>
+                            <span class="feature"><i class="fas fa-ruler-combined"></i> 35 sqm</span>
+                            <span class="feature"><i class="fas fa-sun"></i> Sun Deck</span>
+                        </div>
+                        <p class="price">₹3300 <span>/ night (including breakfast)</span></p>
+                        <p class="description">Wake up to stunning pool views with direct access to our temperature-controlled infinity pool. Perfect for those who want to relax and unwind in style.</p>
+                        <button class="book-btn" onclick="bookRoom('Pool View Room', 3300)">Book Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Deluxe Room -->
+                <div class="slider-item">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Deluxe Room">
+                    <div class="slider-content">
+                        <h2 class="title">Deluxe Room</h2>
+                        <p class="type">Luxury Accommodation</p>
+                        <div class="slider-features">
+                            <span class="feature"><i class="fas fa-bed"></i> King Bed</span>
+                            <span class="feature"><i class="fas fa-water"></i> Sea View</span>
+                            <span class="feature"><i class="fas fa-ruler-combined"></i> 40 sqm</span>
+                            <span class="feature"><i class="fas fa-wifi"></i> Free WiFi</span>
+                        </div>
+                        <p class="price">₹2500 <span>/ night (including breakfast)</span></p>
+                        <p class="description">Our deluxe rooms offer the perfect blend of comfort and luxury with breathtaking sea views, premium amenities, and elegant decor for a memorable stay.</p>
+                        <button class="book-btn" onclick="bookRoom('Deluxe Room', 2500)">Book Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
             </div>
 
-            <div class="item">
-                <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Business Room">
-                <div class="content">
-                    <h2 class="title">Business Room</h2>
-                    <p class="type">Productive Stay</p>
-                    <div class="features">
-                        <span class="feature">Work Desk</span>
-                        <span class="feature">High-speed WiFi</span>
-                        <span class="feature">35 sqm</span>
-                        <span class="feature">Meeting Space</span>
+            <!-- Slider Navigation -->
+            <div class="slider-nav">
+                <div class="slider-dot active" data-index="0"></div>
+                <div class="slider-dot" data-index="1"></div>
+                <div class="slider-dot" data-index="2"></div>
+                <div class="slider-dot" data-index="3"></div>
+            </div>
+
+            <!-- Slider Arrows -->
+            <div class="slider-arrows">
+                <button class="slider-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Amenities Section -->
+    <section class="amenities-section">
+        <div class="amenities-container">
+            <div class="section-header">
+                <h1>Premium Amenities</h1>
+                <p>We provide exceptional amenities to ensure your stay is comfortable, convenient, and memorable.</p>
+            </div>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-wifi"></i>
                     </div>
-                    <p class="price">₹3200 / night</p>
-                    <p class="description">
-                        Designed for business travelers with a spacious work area, premium connectivity, and access to our business center.
-                    </p>
-                    <button class="book-btn" onclick="bookRoom('Business Room', 3200)">Book Now</button>
+                    <h3>High-Speed WiFi</h3>
+                    <p>Stay connected with our ultra-fast fiber optic internet available throughout the property with dedicated bandwidth for seamless streaming and video calls.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Infinity Pool</h3>
+                    <p>Relax in our temperature-controlled infinity pool with stunning ocean views, private cabanas, and poolside service for ultimate relaxation.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Gourmet Dining</h3>
+                    <p>Experience exquisite culinary creations at our award-winning restaurant featuring locally-sourced ingredients and international cuisine.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa Services</h3>
+                    <p>Rejuvenate with our signature spa treatments using organic products, including massages, facials, and holistic therapies in a serene environment.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Fitness Center</h3>
+                    <p>State-of-the-art gym equipment available 24/7 with personal training sessions, yoga classes, and stunning views to motivate your workout.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <h3>24/7 Concierge</h3>
+                    <p>Our dedicated staff is always available to assist with any request, from restaurant reservations to arranging local tours and transportation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="section-header">
+                <h1>Guest Experiences</h1>
+                <p>Don't just take our word for it - hear what our valued guests have to say about their stay with us.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The Honeymoon Suite exceeded all our expectations. The attention to detail was remarkable, and the staff went above and beyond to make our stay special. The private balcony with sunset views was our favorite spot. We'll definitely be back for our anniversary!"
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah K." class="author-avatar">
+                        <div class="author-info">
+                            <h4>Sarah K.</h4>
+                            <p>Honeymoon Stay</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "As a frequent business traveler, I appreciate the thoughtful design of the Executive Room. The work desk was perfect, the high-speed internet never failed, and the soundproofing allowed for excellent concentration. The location was convenient for all my meetings in the city."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rajesh P." class="author-avatar">
+                        <div class="author-info">
+                            <h4>Rajesh P.</h4>
+                            <p>Business Traveler</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Our family loved the Pool View Room! Waking up to that beautiful view every morning was magical. The kids especially enjoyed the pool, and we appreciated the family-friendly amenities. The staff arranged wonderful activities for children, giving us some much-needed relaxation time."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya M." class="author-avatar">
+                        <div class="author-info">
+                            <h4>Priya M.</h4>
+                            <p>Family Vacation</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Special Offers Section -->
+    <section class="offers-section">
+        <div class="offers-container">
+            <div class="section-header">
+                <h1>Special Offers</h1>
+                <p>Take advantage of our exclusive packages and deals for an enhanced stay experience.</p>
+            </div>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWwlMjBzcGF8ZW58MHx8MHx8fDA%3D" alt="Spa Package">
+                    </div>
+                    <div class="offer-content">
+                        <h3>Romantic Spa Retreat</h3>
+                        <p>Enjoy a couple's massage, champagne, and late checkout with our premium spa package. Perfect for anniversaries or romantic getaways.</p>
+                        <div class="offer-price">
+                            <del>₹6500</del> ₹5500
+                        </div>
+                        <a href="#" class="offer-btn" onclick="bookOffer('Romantic Spa Retreat', 5500)">Book Package</a>
+                    </div>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhbWlseSUyMHZhY2F0aW9ufGVufDB8fDB8fHww" alt="Family Package">
+                    </div>
+                    <div class="offer-content">
+                        <h3>Family Getaway</h3>
+                        <p>Special rates for families including free meals for children under 12, activity packages, and connecting rooms upon availability.</p>
+                        <div class="offer-price">
+                            <del>₹8000</del> ₹6800
+                        </div>
+                        <a href="#" class="offer-btn" onclick="bookOffer('Family Getaway', 6800)">Book Package</a>
+                    </div>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bG9uZyUyMHN0YXl8ZW58MHx8MHx8fDA%3D" alt="Extended Stay">
+                    </div>
+                    <div class="offer-content">
+                        <h3>Extended Stay</h3>
+                        <p>Discounted rates for stays of 7 nights or longer, including complimentary laundry service, daily room refresh, and grocery delivery.</p>
+                        <div class="offer-price">
+                            <del>₹17500</del> ₹14900
+                        </div>
+                        <a href="#" class="offer-btn" onclick="bookOffer('Extended Stay', 14900)">Book Package</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Your original footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="https://alakanresidency.com/wp-content/uploads/2023/06/ALAKAN-LOGO-2.png" alt="Alakan Residency">
+                </div>
+                <p>Welcome to Alakan Residency, your premier accommodation near Arulmigu Subramanya Swamy Temple in Tiruchendur.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tripadvisor"></i></a>
                 </div>
             </div>
 
-            <div class="item">
-                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Pool View Room">
-                <div class="content">
-                    <h2 class="title">Pool View Room</h2>
-                    <p class="type">Refreshing Stay</p>
-                    <div class="features">
-                        <span class="feature">Queen Bed</span>
-                        <span class="feature">Pool Access</span>
-                        <span class="feature">35 sqm</span>
-                        <span class="feature">Sun Deck</span>
-                    </div>
-                    <p class="price">₹3300 / night</p>
-                    <p class="description">
-                        Wake up to views of our sparkling pool and enjoy direct access to our poolside relaxation areas.
-                    </p>
-                    <button class="book-btn" onclick="bookRoom('Pool View Room', 3300)">Book Now</button>
-                </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#">Rooms & Suites</a></li>
+                    <li><a href="../gallery/gallery.html">Gallery</a></li>
+                    <li><a href="../services/services.html">Services</a></li>
+                    <li><a href="../contact us/contact.html">Contact Us</a></li>
+                </ul>
             </div>
 
-            <div class="item">
-                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Deluxe Room">
-                <div class="content">
-                    <h2 class="title">Deluxe Room</h2>
-                    <p class="type">Luxury Accommodation</p>
-                    <div class="features">
-                        <span class="feature">King Bed</span>
-                        <span class="feature">Sea View</span>
-                        <span class="feature">40 sqm</span>
-                        <span class="feature">Free WiFi</span>
-                    </div>
-                    <p class="price">₹2500 / night</p>
-                    <p class="description">
-                        Our Deluxe Rooms offer a perfect blend of comfort and elegance with modern amenities and stunning views of the Arabian Sea.
-                    </p>
-                    <button class="book-btn" onclick="bookRoom('Deluxe Room', 2500)">Book Now</button>
-                </div>
+            <div class="footer-contact">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 335/1 Taluk Office Road, Tiruchendur, Tamil Nadu 628215</p>
+                <p><i class="fas fa-phone"></i> +91 95142 52526</p>
+                <p><i class="fas fa-envelope"></i> bookme@alakanresidency.com</p>
+                <p><i class="fas fa-clock"></i> 24/7 Reception</p>
             </div>
         </div>
 
-        <div class="thumbnail">
-            <div class="item active" data-index="0">
-                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Honeymoon Suite">
-            </div>
-            <div class="item" data-index="1">
-                <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Business Room">
-            </div>
-            <div class="item" data-index="2">
-                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D" alt="Pool View Room">
-            </div>
-            <div class="item" data-index="3">
-                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww" alt="Deluxe Room">
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Alakan Residency. All Rights Reserved. Designed by Softek Square Pvt Ltd</p>
         </div>
+    </footer>
 
-        <div class="arrowButtons">
-            <button class="prev"><i class="fas fa-chevron-left"></i></button>
-            <button class="next"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </div>
-<style>
-/* ======= Alakan Footer Styles ======= */
-.alak-footer {
-  background: linear-gradient(to right, #800000, #5a0000, #450000); /* Maroon gradient */
-  color: #FFD700; /* Gold text */
-  padding: 60px 20px 30px;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.alak-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-body::-webkit-scrollbar{
-  display:none;
-}
-.alak-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: space-between;
-}
-
-.alak-grid > div {
-  flex: 1 1 220px;
-  min-width: 200px;
-}
-
-.alak-logo {
-  width: 160px;
-  margin-bottom: 20px;
-}
-
-.alak-text {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.alak-fade-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp2 1s forwards;
-}
-
-.delay-1 { animation-delay: 0.3s; }
-.delay-2 { animation-delay: 0.6s; }
-.delay-3 { animation-delay: 0.9s; }
-.delay-4 { animation-delay: 1.2s; }
-
-@keyframes fadeInUp2 {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.alak-footer h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  color: #FFD700; /* Gold headings */
-}
-
-.alak-footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-.alak-footer li {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.alak-footer a {
-  text-decoration: none;
-  color: #FFD700; /* Gold links */
-  transition: color 0.3s;
-}
-
-.alak-footer a:hover {
-  color: #fff;
-}
-
-.alak-social a {
-  font-size: 24px;
-  margin-top: 10px;
-  display: inline-block;
-  color: #FFD700; /* Gold social icons */
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.alak-social a:hover {
-  transform: scale(1.1);
-  color: #fff;
-}
-
-.alak-icon-wrap img {
-  width: 40px;
-  height: 40px;
-  margin-top: 30px;
-}
-
-.alak-subfooter {
-  border-top: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
-  margin-top: 50px;
-  padding-top: 20px;
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  text-align: center;
-}
-
-/* Animation: Floating icon */
-.alak-animate-float {
-  animation: floatY 3s ease-in-out infinite;
-}
-@keyframes floatY {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* ======= Language Section Style ======= */
-.alak-fade-up select {
-  width: 100%;
-  padding: 10px 15px;
-  background: rgba(255, 215, 0, 0.1); /* Light gold background */
-  border: 2px solid #FFD700; /* Gold border */
-  border-radius: 8px;
-  font-size: 14px;
-  color: #FFD700; /* Gold text */
-  font-weight: bold;
-  transition: border 0.3s, box-shadow 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20fill%3D'%23FFD700'%20height%3D'20'%20viewBox%3D'0%200%2024%2024'%20width%3D'20'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px 16px;
-}
-
-.alak-fade-up select:focus {
-  outline: none;
-  border-color: #FFD700;
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
-}
-
-.alak-fade-up h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #FFD700;
-}
-
-/* Floating Icon Style */
-.alak-icon-wrap {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.alak-icon-wrap img {
-  width: 40px;
-  height: 40px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-  transition: transform 0.4s ease;
-}
-
-.alak-icon-wrap img:hover {
-  transform: scale(1.1) rotate(5deg);
-}
-</style>
-
-<!-- Alakan Residency Footer -->
-<footer class="alak-footer min-w-full relative right-4 top-16" style="margin: 0px ; width: 100vw ;">
-  <div class="alak-container">
-    <div class="alak-grid">
-      <!-- Logo and Description -->
-      <div class="alak-fade-up">
-        <img src="A-logo.png" alt="Alakan Residency" class="alak-logo" />
-        <p class="alak-text">Welcome to Alakan Residency. A budget-friendly hotel near Arulmigu Subramanya Swamy Temple, Tiruchendur, offering clean, hygienic rooms. Guest satisfaction is our #1 goal.</p>
-      </div>
-
-      <!-- Useful Links -->
-      <div class="alak-fade-up delay-1">
-        <h3>Useful Links</h3>
-        <ul>
-          <li><a href="index.html">Gallery</a></li>
-          <li><a href="../contact-us/index.html">Contact Us</a></li>
-          <li><a href="../about-us/index.html">About Us</a></li>
-          <li><a href="../account/index.html">My Bookings</a></li>
-          <li><a href="../cancellation-policy/index.html">Cancellation Policy</a></li>
-          <li><a href="../accommodation-policy/index.html">Terms & Conditions</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact Info -->
-      <div class="alak-fade-up delay-2">
-        <h3>Contact Us</h3>
-        <ul>
-          <li><i class="las la-map-marker-alt"></i> 335/1 Taluk Office road, Tiruchendur, TN 628215</li>
-          <li><i class="las la-phone"></i> ‪+91 95142 52526‬</li>
-          <li><i class="las la-envelope"></i> bookme@alakanresidency.com</li>
-        </ul>
-        <div class="alak-social">
-          <a href="https://www.facebook.com/alakanresidency" target="_blank"><i class="fab fa-facebook"></i></a>
-        </div>
-      </div>
-
-      <!-- Language + Float Icon -->
-      <div class="alak-fade-up delay-3" b>
-        <h3>Languages</h3>
-        <select>
-          <option>English</option>
-          <option>Tamil</option>
-        </select>
-        <div class="alak-icon-wrap alak-animate-float">
-          <img src="https://cdn-icons-png.flaticon.com/512/3176/3176364.png" alt="icon">
-        </div>
-      </div>
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
     </div>
 
-    <!-- Subfooter -->
-    <div class="alak-subfooter alak-fade-up delay-4">
-      <div>© 2023 - 2024 Alakan Residency. Designed by Softek Square Pvt Ltd</div>
-      <div>All rights reserved.</div>
-    </div>
-  </div>
-</footer>
-    </div>
-    
     <script>
-        // Room data
-        const rooms = [
-            {
-                name: "Honeymoon Suite",
-                type: "Romantic Getaway",
-                price: 4500,
-                image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww",
-                features: ["King Bed", "Private Balcony", "55 sqm", "Champagne"],
-                description: "Celebrate your love in our specially designed honeymoon suite with romantic decor and premium amenities."
-            },
-            {
-                name: "Business Room",
-                type: "Productive Stay",
-                price: 3200,
-                image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D",
-                features: ["Work Desk", "High-speed WiFi", "35 sqm", "Meeting Space"],
-                description: "Designed for business travelers with a spacious work area, premium connectivity, and access to our business center."
-            },
-            {
-                name: "Pool View Room",
-                type: "Refreshing Stay",
-                price: 3300,
-                image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D",
-                features: ["Queen Bed", "Pool Access", "35 sqm", "Sun Deck"],
-                description: "Wake up to views of our sparkling pool and enjoy direct access to our poolside relaxation areas."
-            },
-            {
-                name: "Deluxe Room",
-                type: "Luxury Accommodation",
-                price: 2500,
-                image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww",
-                features: ["King Bed", "Sea View", "40 sqm", "Free WiFi"],
-                description: "Our Deluxe Rooms offer a perfect blend of comfort and elegance with modern amenities and stunning views of the Arabian Sea."
+        // Enhanced Slider Functionality
+   // Enhanced Slider Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sliderTrack = document.querySelector('.slider-track');
+    const sliderItems = document.querySelectorAll('.slider-item');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dots = document.querySelectorAll('.slider-dot');
+    let currentIndex = 0;
+    let autoSlideInterval;
+    const slideDuration = 5000; // 5 seconds
+
+    // Initialize slider
+    function initSlider() {
+        sliderItems.forEach((item, index) => {
+            item.classList.remove('active', 'prev', 'next');
+            
+            if (index === currentIndex) {
+                item.classList.add('active');
+            } else if (index === (currentIndex + 1) % sliderItems.length) {
+                item.classList.add('next');
+            } else if (index === (currentIndex - 1 + sliderItems.length) % sliderItems.length) {
+                item.classList.add('prev');
             }
-        ];
+        });
+        updateDots();
+        startAutoSlide();
+    }
 
-        // Slider functionality
-        let currentIndex = 0;
-        const items = document.querySelectorAll('.list .item');
-        const thumbnails = document.querySelectorAll('.thumbnail .item');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
+    // Go to specific slide
+    function goToSlide(index) {
+        // Handle wrap-around for circular slider
+        if (index < 0) index = sliderItems.length - 1;
+        if (index >= sliderItems.length) index = 0;
 
-        function showSlide(index) {
-            // Hide all slides
-            items.forEach(item => {
-                item.classList.remove('active');
-                item.style.opacity = '0';
+        // Remove all classes first
+        sliderItems.forEach(item => {
+            item.classList.remove('active', 'prev', 'next');
+        });
+
+        // Set new active slide
+        sliderItems[index].classList.add('active');
+        
+        // Set next slide (circular)
+        const nextIndex = (index + 1) % sliderItems.length;
+        sliderItems[nextIndex].classList.add('next');
+        
+        // Set previous slide (circular)
+        const prevIndex = (index - 1 + sliderItems.length) % sliderItems.length;
+        sliderItems[prevIndex].classList.add('prev');
+        
+        currentIndex = index;
+        updateDots();
+        resetAutoSlide();
+    }
+
+    // Update navigation dots
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    // Auto slide functionality
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            goToSlide((currentIndex + 1) % sliderItems.length);
+        }, slideDuration);
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToSlide(currentIndex + 1);
+    });
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', function(e) {
+            e.preventDefault();
+            const slideIndex = parseInt(this.getAttribute('data-index'));
+            goToSlide(slideIndex);
+        });
+    });
+
+    // Pause auto slide on hover
+    const slider = document.querySelector('.luxury-slider');
+    slider.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        resetAutoSlide();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            goToSlide(currentIndex + 1);
+        } else if (e.key === 'ArrowLeft') {
+            goToSlide(currentIndex - 1);
+        }
+    });
+
+    // Initialize the slider
+    initSlider();
+
+ // Book room function
+            window.bookRoom = function(roomName, roomPrice) {
+                const rooms = [
+                    {
+                        name: "Honeymoon Suite",
+                        type: "Romantic Getaway",
+                        price: 4500,
+                        image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww",
+                        features: ["King Bed", "Private Balcony", "55 sqm", "Champagne"],
+                        description: "Indulge in romantic luxury with our honeymoon suite featuring a king-size bed, private balcony with stunning views, and complimentary champagne to celebrate your love."
+                    },
+                    {
+                        name: "Executive Business Room",
+                        type: "Productive Stay",
+                        price: 3200,
+                        image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJvb218ZW58MHx8MHx8fDA%3D",
+                        features: ["Work Desk", "High-speed WiFi", "35 sqm", "Meeting Space"],
+                        description: "Designed for the modern professional, our business room features a spacious work area, high-speed internet, and all the amenities you need for a productive stay."
+                    },
+                    {
+                        name: "Pool View Room",
+                        type: "Refreshing Stay",
+                        price: 3300,
+                        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJvb218ZW58MHx8MHx8fDA%3D",
+                        features: ["Queen Bed", "Pool Access", "35 sqm", "Sun Deck"],
+                        description: "Wake up to stunning pool views with direct access to our temperature-controlled infinity pool. Perfect for those who want to relax and unwind in style."
+                    },
+                    {
+                        name: "Deluxe Room",
+                        type: "Luxury Accommodation",
+                        price: 2500,
+                        image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww",
+                        features: ["King Bed", "Sea View", "40 sqm", "Free WiFi"],
+                        description: "Our deluxe rooms offer the perfect blend of comfort and luxury with breathtaking sea views, premium amenities, and elegant decor for a memorable stay."
+                    }
+                ];
+
+                const selectedRoom = rooms.find(room => room.name === roomName);
+                localStorage.setItem('selectedRoom', JSON.stringify(selectedRoom));
+                window.location.href = '../booking.html/booking.html';
+            };
+
+            // Book offer function
+            window.bookOffer = function(offerName, offerPrice) {
+                localStorage.setItem('selectedOffer', JSON.stringify({
+                    name: offerName,
+                    price: offerPrice
+                }));
+                window.location.href = '../booking.html/booking.html';
+            };
+
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('active');
+                } else {
+                    backToTopBtn.classList.remove('active');
+                }
             });
-            
-            thumbnails.forEach(thumb => thumb.classList.remove('active'));
-            
-            // Show selected slide
-            items[index].classList.add('active');
-            thumbnails[index].classList.add('active');
-            
-            // Trigger animations
-            setTimeout(() => {
-                items[index].style.opacity = '1';
-            }, 50);
-            
-            currentIndex = index;
-        }
 
-        function nextSlide() {
-            let newIndex = (currentIndex + 1) % items.length;
-            showSlide(newIndex);
-        }
-
-        function prevSlide() {
-            let newIndex = (currentIndex - 1 + items.length) % items.length;
-            showSlide(newIndex);
-        }
-
-        // Event listeners
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-
-        thumbnails.forEach(thumb => {
-            thumb.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                showSlide(index);
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
-        });
 
-        // Auto slide
-        let autoSlide = setInterval(nextSlide, 5000);
-
-        // Pause on hover
-        const slider = document.querySelector('.slider');
-        slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
-        slider.addEventListener('mouseleave', () => {
-            autoSlide = setInterval(nextSlide, 5000);
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-        });
-
-        // Book room function
-        function bookRoom(roomName, roomPrice) {
-            // Store selected room data in localStorage
-            const selectedRoom = rooms.find(room => room.name === roomName);
-            localStorage.setItem('selectedRoom', JSON.stringify(selectedRoom));
-            
-            // Redirect to booking page
-            window.location.href = '../booking.html/booking.html';
-        }
-
-        // Initialize slider
-        showSlide(0);
-        const canvas = document.getElementById("houseCanvas");
-const ctx = canvas.getContext("2d");
-ctx.lineWidth = 4;
-ctx.lineJoin = "round";
-ctx.lineCap = "round";
-
-const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-gradient.addColorStop(0, "#e6cd7d");
-gradient.addColorStop(1, "#7a1c1c");
-ctx.strokeStyle = gradient;
-
-const lines = [
-  [[150, 80], [100, 120]],
-  [[150, 80], [200, 120]],
-  [[100, 120], [100, 200]],
-  [[200, 120], [200, 200]],
-  [[100, 200], [200, 200]],
-  [[150, 120], [150, 200]],
-  [[100, 160], [150, 160]],
-  [[150, 160], [200, 160]],
-  [[125, 160], [125, 200]],
-  [[100, 180], [150, 180]]
-];
-
-let step = 0;
-const logo = new Image();
-logo.src = "A-logo.png";
-
-function drawSegment(segment) {
-  ctx.beginPath();
-  ctx.moveTo(segment[0][0], segment[0][1]);
-  ctx.lineTo(segment[1][0], segment[1][1]);
-  ctx.stroke();
-}
-
-function animateDrawing() {
-if (step < lines.length) {
-drawSegment(lines[step]);
-step++;
-setTimeout(animateDrawing, 300);
-} else {
-setTimeout(() => {
-// Draw logo in the middle
-let alpha = 0;
-
-const fadeIn = setInterval(() => {
-ctx.clearRect(125, 107, 50, 50);// Clean full spot
-ctx.globalAlpha = alpha;
-ctx.drawImage(logo, 105, 100, 80, 80);
-alpha += 0.05;
-
-if (alpha >= 1) {
-clearInterval(fadeIn);
-ctx.globalAlpha = 1;
-
-// Wait and then show content
-setTimeout(() => {
-document.getElementById("loader").style.display = "none";
-document.getElementById("content").style.display = "block";
-}, 1200);
-}
-
-},50);
-},500);
-}
-}
-
-// Underline move
+            // Underline move
 const navItems = document.querySelectorAll(".nav-item");
 const underline = document.getElementById("underline");
+const activeNavItem = document.querySelector(".nav-item.active");
+
+if (activeNavItem) {
+  moveUnderline(activeNavItem);
+}
 
 function moveUnderline(target) {
   const rect = target.getBoundingClientRect();
   const navRect = target.parentElement.getBoundingClientRect();
   const left = rect.left - navRect.left;
   underline.style.left = `${left}px`;
-  underline.style.width =` ${rect.width}px`;
+  underline.style.width = `${rect.width}px`;
 }
 
 navItems.forEach((item) => {
@@ -1081,34 +1770,64 @@ navItems.forEach((item) => {
   });
 });
 
-// Hamburger toggle
+// Mobile hamburger toggle
 const hamburger = document.getElementById("hamburger");
 const navList = document.getElementById("nav-list");
 
-hamburger.addEventListener("click", () => {
+hamburger.addEventListener("click", function (e) {
+  e.stopPropagation();
   navList.classList.toggle("show");
   hamburger.classList.toggle("active");
 });
 
-// Dropdown toggle
+// Dropdown toggle - modified for mobile
 const dropdown = document.getElementById("dropdown");
 const dropdownToggle = document.getElementById("dropdownToggle");
+const dropdownMenu = document.getElementById("dropdownMenu");
 
-dropdownToggle.addEventListener("click", (e) => {
+dropdownToggle.addEventListener("click", function (e) {
   e.preventDefault();
+  e.stopPropagation();
   dropdown.classList.toggle("open");
+
+  // Close other dropdowns if any
+  document.querySelectorAll(".dropdown").forEach((item) => {
+    if (item !== dropdown) {
+      item.classList.remove("open");
+    }
+  });
 });
 
-document.addEventListener("click", (e) => {
-  if (!dropdown.contains(e.target) && !dropdownToggle.contains(e.target)) {
+// Close dropdown when clicking outside
+document.addEventListener("click", function (e) {
+  if (!dropdown.contains(e.target)) {
     dropdown.classList.remove("open");
   }
+
+  // Close mobile menu when clicking outside
+  if (
+    window.innerWidth <= 768 &&
+    !navList.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    navList.classList.remove("show");
+    hamburger.classList.remove("active");
+  }
 });
-window.onload = () => {
-  const active = document.querySelector(".nav-item.active");
-  if (active) moveUnderline(active);
-  animateDrawing();
-};
+
+// Close mobile menu when clicking a link
+const navLinks = document.querySelectorAll(".nav-item a:not(#dropdownToggle)");
+navLinks.forEach((link) => {
+  link.addEventListener("click", function () {
+    if (window.innerWidth <= 768) {
+      navList.classList.remove("show");
+      hamburger.classList.remove("active");
+    }
+  });
+});
+        });
+
+           
     </script>
 </body>
 </html>
